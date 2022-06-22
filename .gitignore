@@ -293,3 +293,4 @@ cython_debug/
 
 
 config/
+manage.py
