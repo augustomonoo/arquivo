@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from arquivo.models import Arquivo, Cliente, Lancamento, TipoDeLancamento
+from arquivo.models import Arquivo, Cliente, Documento, TipoDeDocumento
 
 
 @admin.register(Cliente)
@@ -13,11 +13,11 @@ class ArquivoAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(TipoDeLancamento)
+@admin.register(TipoDeDocumento)
 class TipoDeLancamentoAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Lancamento)
+@admin.register(Documento)
 class LancamentoAdmin(admin.ModelAdmin):
     pass
