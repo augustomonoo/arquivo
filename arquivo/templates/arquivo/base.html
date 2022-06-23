@@ -1,32 +1,31 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="white" />
-
-    <link rel="stylesheet" href="{% static 'arquivo/style.css' %}">
-    <title>Document</title>
-</head>
-
-<body class="bg-gray-200 dark:bg-gray-800 flex flex-row flex-nowrap">
-    <nav class="p-2 bg-gray-400 dark:bg-gray-600 sm:w-6/12 md:w-4/12 lg:w-3/12 flex flex-col h-screen">
-        {% url 'main_index' as href %}
-        {% include 'arquivo/components/nav_link.html' with text="Início" %}
-        {% url 'main_consulta' as href %}
-        {% include 'arquivo/components/nav_link.html' with text="Consulta" %}
-        {% url 'arquivo_novo' as href %}
-        {% include 'arquivo/components/nav_link.html' with text="Novo arquivo" %}
-        {% url 'arquivo_listar' as href %}
-        {% include 'arquivo/components/nav_link.html' with text="Consultar arquivo" %}
-    </nav>
-
-    <section class="w-full px-2">
-        {% block content %}{% endblock content %}
-    </section>
-</body>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="theme-color"
+              media="(prefers-color-scheme: light)"
+              content="white"/>
+        <link rel="stylesheet" href="{% static 'arquivo/style.css' %}">
+        <title>Document</title>
+    </head>
+    <body class="bg-gray-200 dark:bg-gray-800 flex flex-row flex-nowrap">
+        <nav class="p-2 bg-gray-400 dark:bg-gray-600 sm:w-6/12 md:w-4/12 lg:w-3/12 flex flex-col h-screen">
+            {% for nav_link in nav_links %}
+                {% if nav_link.href %}
+                    <a href="{{ nav_link.href }}"
+                       class="p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">{{ nav_link.text }}</a>
+                {% else %}
+                    <p class="ml-8 border-b-2 dark:border-b-white font-bold bg-slate-400 px-2 py-1">{{ nav_link }}</p>
+                {% endif %}
+            {% endfor %}
+        </nav>
+        <section class="w-full px-2">
+            {% block content %}
+            {% endblock content %}
+        </section>
+    </body>
 </html>
