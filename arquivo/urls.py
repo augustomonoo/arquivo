@@ -2,6 +2,11 @@ from django.urls import path, include
 
 from arquivo.views import arquivo
 from arquivo.views import main
+from arquivo.views import documento
+
+documento_patterns = [
+    path("", documento.consulta, name="documento_lista"),
+]
 
 arquivo_patterns = [
     path("", arquivo.arquivo_listar, name="arquivo_listar"),
@@ -16,10 +21,10 @@ arquivo_patterns = [
 
 main_patterns = [
     path("", main.index, name="main_index"),
-    path("consulta/", main.consulta, name="main_consulta"),
 ]
 
 urlpatterns = [
     path("", include(main_patterns)),
+    path("documento/", include(documento_patterns)),
     path("arquivo/", include(arquivo_patterns)),
 ]
