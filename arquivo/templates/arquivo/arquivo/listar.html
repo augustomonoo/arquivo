@@ -1,22 +1,20 @@
-{% extends 'arquivo/base.html' %}
+{% extends "arquivo/base.html" %}
 
 {% block content %}
-{% for arquivo in arquivos %}
-<div class="border rounded bg-slate-300 p-2 mb-2 mx-auto flex flex-row flex-wrap justify-between">
-    <h3 class="text-xl font-bold">{{ arquivo }}</h3>
-    {% if arquivo.fechado %}
-    <p class="rounded bg-red-500 p-2 font-bold text-white">Fechado</p>
-    {% else %}
-    <p class="rounded bg-green-500 p-2 font-bold text-black">Disponível</p>
-    {% endif %}
-    <div class="w-full">
-        {% include 'arquivo/components/anchor_button.html' with href=arquivo.get_adicionar_documento_url text="Adicionar documento" %}
-        <ul class="list-disc list-inside">
-            {% for documento in arquivo.documento_set.all %}
-            <li>{{ documento.cliente }} - {{ documento.conteudo }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
-{% endfor %}
+    {% for arquivo in arquivos %}
+        <div class="border rounded bg-slate-300 p-2 mb-2 mx-auto flex flex-row flex-wrap justify-between">
+            <h3 class="text-xl font-bold">{{ arquivo }}</h3>
+            {% if arquivo.fechado %}
+                <p class="rounded bg-red-500 p-2 font-bold text-white">Fechado</p>
+            {% else %}
+                <p class="rounded bg-green-500 p-2 font-bold text-black">Disponível</p>
+            {% endif %}
+            <div class="w-full">
+                {% include "arquivo/components/anchor_button.html" with href=arquivo.get_adicionar_documento_url text="Adicionar documento" %}
+                <ul class="list-disc list-inside">
+                    {% for documento in arquivo.documento_set.all %}<li>{{ documento.cliente }} - {{ documento.conteudo }}</li>{% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock content %}

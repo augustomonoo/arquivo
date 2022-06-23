@@ -1,28 +1,26 @@
-{% extends 'arquivo/base.html' %}
+{% extends "arquivo/base.html" %}
 
 {% block content %}
-<form action=".">
-    {% include 'arquivo/components/form.html' %}
-    {% include 'arquivo/components/button.html' with type="submit" text="Pesquisar" %}
-</form>
-
-<table>
-    <thead>
-        <tr>
-            <th>Arquivo</th>
-            <th>Cliente</th>
-            <th>Descrição</th>
-            <th>Arquivado em</th>
-        </tr>
-    </thead>
-    {% for resultado in queryset %}
-    <tr>
-        <td>{{ resultado.arquivo }}</td>
-        <td>{{ resultado.cliente }}</td>
-        <td>{{ resultado.conteudo }}</td>
-        <td>{{ resultado.criado_em }}</td>
-    </tr>
-    {% endfor %}
-</table>
-
+    <form action=".">
+        {% include "arquivo/components/form.html" %}
+        {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Arquivo</th>
+                <th>Cliente</th>
+                <th>Descrição</th>
+                <th>Arquivado em</th>
+            </tr>
+        </thead>
+        {% for resultado in queryset %}
+            <tr>
+                <td>{{ resultado.arquivo }}</td>
+                <td>{{ resultado.cliente }}</td>
+                <td>{{ resultado.conteudo }}</td>
+                <td>{{ resultado.criado_em }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock content %}

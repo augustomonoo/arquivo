@@ -1,9 +1,9 @@
-{% extends 'arquivo/base.html' %}
+{% extends "arquivo/base.html" %}
 
 {% block content %}
-<form action="." method="post">
-    {% csrf_token %}
-    {% include 'arquivo/components/form.html' %}
-    {% include 'arquivo/components/button.html' with type="submit" text="Salvar" %}
-</form>
+    <form action="." method="post">
+        {% csrf_token %}
+        {% include "arquivo/components/form.html" %}
+        {% include "arquivo/components/button.html" with type="submit" text="Salvar" %}
+    </form>
 {% endblock content %}

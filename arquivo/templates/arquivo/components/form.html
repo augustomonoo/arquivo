@@ -1,10 +1,9 @@
 {% load widget_tweaks %}
-{% for hidden_field in form.hidden_fields %}
-{{ hidden_field }}
-{% endfor %}
+
+{% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
 {% for field in form.visible_fields %}
-<div class="flex flex-col">
-    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-    {% render_field field class+="form-input rounded" placeholder=field.label%}
-</div>
+    <div class="flex flex-col">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {% render_field field class+="form-input rounded" placeholder=field.label %}
+    </div>
 {% endfor %}
