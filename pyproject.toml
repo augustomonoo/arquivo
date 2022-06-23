@@ -7,6 +7,7 @@ authors = ["Carlos Augusto Monoo Pereira Barbosa <augustomonoo@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 Django = "^4.0.5"
+django-widget-tweaks = "^1.4.12"
 
 [tool.poetry.dev-dependencies]
 django-extensions = "^3.1.5"
