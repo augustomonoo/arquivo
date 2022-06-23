@@ -1,21 +1,27 @@
 [tool.poetry]
+authors = ["Carlos Augusto Monoo Pereira Barbosa <augustomonoo@gmail.com>"]
+description = ""
 name = "arquivo"
 version = "0.1.0"
-description = ""
-authors = ["Carlos Augusto Monoo Pereira Barbosa <augustomonoo@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
 Django = "^4.0.5"
 django-widget-tweaks = "^1.4.12"
+python = "^3.10"
 
 [tool.poetry.dev-dependencies]
+Werkzeug = "^2.1.2"
+black = "^22.3.0"
+django-debug-toolbar = "^3.4.0"
 django-extensions = "^3.1.5"
 django-livereload-server = "^0.4"
-django-debug-toolbar = "^3.4.0"
-black = "^22.3.0"
-Werkzeug = "^2.1.2"
+djlint = "^1.2.1"
+
+[tool.djlint]
+blank_line_after_tag = "load,extends"
+ignore = "H017"
+profile = "django"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]
