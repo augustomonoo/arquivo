@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 from arquivo.models import Arquivo, TipoDeDocumento, Cliente
 
 
@@ -26,3 +27,7 @@ class Documento(models.Model):
 
     def __str__(self):
         return f"{self.arquivo} - {self.tipo_de_documento}"
+
+    @classmethod
+    def get_listar_url(cls):
+        return reverse_lazy("documento_listar")
