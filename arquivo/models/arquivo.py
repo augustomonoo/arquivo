@@ -13,7 +13,7 @@ class Arquivo(models.Model):
         return reverse_lazy("arquivo_editar", args=(self.id,))
 
     @classmethod
-    def get_novo_url(self) -> str:
+    def get_criar_url(self) -> str:
         return reverse_lazy("arquivo_novo")
 
     @classmethod
