@@ -5,7 +5,7 @@ from arquivo.views import main
 from arquivo.views import documento
 
 documento_patterns = [
-    path("", documento.consulta, name="documento_lista"),
+    path("", documento.listar, name="documento_listar"),
 ]
 
 arquivo_patterns = [

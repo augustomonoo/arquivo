@@ -5,7 +5,7 @@ from arquivo.forms import ConsultaDocumentoForm
 from arquivo.models import Documento
 
 
-def consulta(request) -> HttpResponse:
+def listar(request) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
     queryset = Documento.objects.all()
     if form.is_valid():
