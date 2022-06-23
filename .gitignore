@@ -294,3 +294,4 @@ cython_debug/
 
 config/
 manage.py
+arquivo/static/arquivo/style.css
