@@ -17,9 +17,11 @@
             {% for nav_link in nav_links %}
                 {% if nav_link.href %}
                     <a href="{{ nav_link.href }}"
-                       class="p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">{{ nav_link.text }}</a>
+                       class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">{{ nav_link.text }}</a>
                 {% else %}
-                    <p class="ml-8 border-b-2 dark:border-b-white font-bold bg-slate-400 px-2 py-1">{{ nav_link }}</p>
+                    <p class="border-b-2 border-dashed mb-2 border-b-slate-700 dark:border-b-slate-400 text-black dark:text-white font-bold">
+                        {{ nav_link }}
+                    </p>
                 {% endif %}
             {% endfor %}
         </nav>
