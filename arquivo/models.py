@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 
 class Cliente(models.Model):
@@ -15,8 +16,22 @@ class Arquivo(models.Model):
     def __str__(self) -> str:
         return f"{self.etiqueta:05}"
 
+    def get_editar_url(self) -> str:
+        return reverse_lazy("arquivo_editar", args=(self.id,))
 
-class TipoDeLancamento(models.Model):
+    @classmethod
+    def get_novo_url(self) -> str:
+        return reverse_lazy("arquivo_novo")
+
+    @classmethod
+    def get_listar_url(self) -> str:
+        return reverse_lazy("arquivo_listar")
+
+    def get_adicionar_documento_url(self):
+        return reverse_lazy("arquivo_adicionar_documento", args=(self.id,))
+
+
+class TipoDeDocumento(models.Model):
     descricao = models.CharField(max_length=255, verbose_name="descrição")
 
     class Meta:
@@ -27,16 +42,16 @@ class TipoDeLancamento(models.Model):
         return f"{self.descricao}"
 
 
-class Lancamento(models.Model):
+class Documento(models.Model):
     arquivo = models.ForeignKey(
-        "arquivo.Arquivo", verbose_name="arquivo", on_delete=models.PROTECT
+        Arquivo, verbose_name="arquivo", on_delete=models.PROTECT
     )
     cliente = models.ForeignKey(
-        "arquivo.Cliente", verbose_name="cliente", on_delete=models.PROTECT
+        Cliente, verbose_name="cliente", on_delete=models.PROTECT
     )
-    tipo_de_lancamento = models.ForeignKey(
-        "arquivo.TipoDeLancamento",
-        verbose_name="tipo de lançamento",
+    tipo_de_documento = models.ForeignKey(
+        TipoDeDocumento,
+        verbose_name="tipo de documento",
         on_delete=models.PROTECT,
     )
     conteudo = models.TextField(verbose_name="conteúdo")
@@ -46,8 +61,8 @@ class Lancamento(models.Model):
     )
 
     class Meta:
-        verbose_name = "lançamento"
-        verbose_name_plural = "lançamentos"
+        verbose_name = "documento"
+        verbose_name_plural = "documentos"
 
     def __str__(self):
-        return f"{self.arquivo} - {self.tipo_de_lancamento}"
+        return f"{self.arquivo} - {self.tipo_de_documento}"
