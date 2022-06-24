@@ -1,7 +1,7 @@
 from abc import abstractmethod
 from dataclasses import field
 from django import forms
-from arquivo.models import Arquivo, Documento
+from arquivo.models import Arquivo, Documento, Cliente
 from django.db.models import QuerySet, Q
 
 
@@ -56,4 +56,4 @@ class DocumentoForm(forms.ModelForm):
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ["nome"]
+        fields = ["razao_social"]
