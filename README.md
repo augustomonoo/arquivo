@@ -27,6 +27,19 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "livereload.middleware.LiveReloadScript",
     ]
+
+TEMPLATES = [
+    {
+        # ...
+        "OPTIONS": {
+            "context_processors": [
+                # ...
+                "arquivo.context_processors.arquivo",
+            ],
+        },
+    },
+]
+
 ```
 
 7. Adicione as urls do app em `config\urls.py`
