@@ -11,7 +11,7 @@ def cliente_novo(request) -> HttpResponse:
         cliente = form.save()
         return redirect(cliente.get_editar_url())
     contexto = {
-        "cliente": cliente,
+        "Cliente": Cliente,
         "form": form,
     }
     return render(request, "arquivo/cliente/novo.html", contexto)
