@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 
 class Cliente(models.Model):
@@ -6,3 +7,7 @@ class Cliente(models.Model):
 
     def __str__(self) -> str:
         return f"{self.razao_social}"
+
+    @classmethod
+    def get_criar_url(self) -> str:
+        return reverse_lazy("cliente_novo")
