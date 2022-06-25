@@ -1,8 +1,14 @@
 from django.urls import path, include
 
-from arquivo.views import arquivo
 from arquivo.views import main
+from arquivo.views import arquivo
+from arquivo.views import cliente
 from arquivo.views import documento
+
+
+cliente_patterns = [
+    path("novo/", cliente.cliente_novo, name="cliente_novo"),
+]
 
 documento_patterns = [
     path("", documento.listar, name="documento_listar"),
@@ -27,4 +33,5 @@ urlpatterns = [
     path("", include(main_patterns)),
     path("documento/", include(documento_patterns)),
     path("arquivo/", include(arquivo_patterns)),
+    path("cliente/", include(cliente_patterns)),
 ]
