@@ -12,13 +12,13 @@ class Arquivo(models.Model):
     def get_editar_url(self) -> str:
         return reverse_lazy("arquivo_editar", args=(self.id,))
 
+    def get_adicionar_documento_url(self):
+        return reverse_lazy("arquivo_adicionar_documento", args=(self.id,))
+
     @classmethod
-    def get_criar_url(self) -> str:
+    def get_criar_url(cls) -> str:
         return reverse_lazy("arquivo_novo")
 
     @classmethod
-    def get_listar_url(self) -> str:
+    def get_listar_url(cls) -> str:
         return reverse_lazy("arquivo_listar")
-
-    def get_adicionar_documento_url(self):
-        return reverse_lazy("arquivo_adicionar_documento", args=(self.id,))

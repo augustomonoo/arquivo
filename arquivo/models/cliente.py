@@ -9,5 +9,5 @@ class Cliente(models.Model):
         return f"{self.razao_social}"
 
     @classmethod
-    def get_criar_url(self) -> str:
+    def get_criar_url(cls) -> str:
         return reverse_lazy("cliente_novo")
