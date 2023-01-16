@@ -42,7 +42,7 @@ class DocumentoForm(forms.ModelForm):
         fields = [
             "cliente",
             "tipo_de_documento",
-            "conteudo",
+            "observacao",
         ]
 
 

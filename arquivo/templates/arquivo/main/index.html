@@ -5,9 +5,9 @@
     <section class="columns-2">
         {% for lancamento in ultimos_lancamentos %}
             <section class="bg-gray-300 w-full">
-                {{ lancamento.criado_em|date:"SHORT_DATE_FORMAT" }} - {{ lancamento.cliente }} -
-                {{ lancamento.tipo_de_lancamento }}
-                {{ lancamento.conteudo }}
+                {{ lancamento.data_arquivo|date:"SHORT_DATE_FORMAT" }} - {{ lancamento.cliente }} -
+                {{ lancamento.tipo_de_documento }}
+                {{ lancamento.observacao }}
             </section>
         {% endfor %}
     </section>

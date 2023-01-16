@@ -1,30 +1,37 @@
-from .cliente import Cliente
-from .tipo_de_documento import TipoDeDocumento
 from django.db import models
 from django.urls import reverse_lazy
 
 
+from django.contrib.auth.models import User
+
+from .cliente import Cliente
+from .tipo_de_documento import TipoDeDocumento
+
+
 class Documento(models.Model):
-    cliente = models.ForeignKey(
-        Cliente, verbose_name="cliente", on_delete=models.PROTECT
-    )
+    numero_caixa = models.FloatField(default=-1.0)
     tipo_de_documento = models.ForeignKey(
         TipoDeDocumento,
         verbose_name="tipo de documento",
-        on_delete=models.PROTECT,
+        on_delete=models.DO_NOTHING,
     )
-    conteudo = models.TextField(verbose_name="conteúdo")
-    criado_em = models.DateTimeField(auto_now_add=True, verbose_name="criado em")
-    modificado_em = models.DateTimeField(
-        auto_now=True, verbose_name="ultima modificação"
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
+    data_finalizacao = models.DateTimeField(null=True)
+    data_saida = models.DateTimeField(null=True)
+    cliente = models.ForeignKey(
+        Cliente, verbose_name="cliente", on_delete=models.DO_NOTHING
     )
+    observacao = models.CharField(max_length=230, null=True)
+    cheia = models.BooleanField(default=False)
+    data_arquivo = models.DateTimeField(null=True)
+    data_inicio = models.DateTimeField(null=True)
 
     class Meta:
         verbose_name = "documento"
         verbose_name_plural = "documentos"
 
     def __str__(self):
-        return f"{self.arquivo} - {self.tipo_de_documento}"
+        return f"{self.tipo_de_documento} - {self.observacao}"
 
     @classmethod
     def get_listar_url(cls):
