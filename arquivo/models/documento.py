@@ -1,6 +1,8 @@
+from .arquivo import Arquivo
+from .cliente import Cliente
+from .tipo_de_documento import TipoDeDocumento
 from django.db import models
 from django.urls import reverse_lazy
-from arquivo.models import Arquivo, TipoDeDocumento, Cliente
 
 
 class Documento(models.Model):
