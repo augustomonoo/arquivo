@@ -1,15 +1,12 @@
 from django.contrib import admin
 
-from arquivo.models import Arquivo, Cliente, Documento, TipoDeDocumento
+from arquivo.models import Cliente
+from arquivo.models import Documento
+from arquivo.models import TipoDeDocumento
 
 
 @admin.register(Cliente)
 class ClienteAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Arquivo)
-class ArquivoAdmin(admin.ModelAdmin):
     pass
 
 

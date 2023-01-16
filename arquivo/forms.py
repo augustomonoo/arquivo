@@ -1,17 +1,10 @@
 from abc import abstractmethod
+from arquivo.models import Cliente
+from arquivo.models import Documento
 from dataclasses import field
 from django import forms
-from arquivo.models import Arquivo, Documento, Cliente
-from django.db.models import QuerySet, Q
-
-
-class ArquivoForm(forms.ModelForm):
-    class Meta:
-        model = Arquivo
-        fields = "__all__"
-
-    def save(self, *args, **kwargs) -> Arquivo:
-        return super().save(*args, **kwargs)
+from django.db.models import Q
+from django.db.models import QuerySet
 
 
 class ConsultaBaseForm(forms.Form):

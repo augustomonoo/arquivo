@@ -1,4 +1,3 @@
-from .arquivo import Arquivo
 from .cliente import Cliente
 from .tipo_de_documento import TipoDeDocumento
 from django.db import models
@@ -6,9 +5,6 @@ from django.urls import reverse_lazy
 
 
 class Documento(models.Model):
-    arquivo = models.ForeignKey(
-        Arquivo, verbose_name="arquivo", on_delete=models.PROTECT
-    )
     cliente = models.ForeignKey(
         Cliente, verbose_name="cliente", on_delete=models.PROTECT
     )
