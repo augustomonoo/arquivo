@@ -9,22 +9,22 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("arquivo_json", type=str)
-        parser.add_argument("tabela_alvo", type=str)
+        parser.add_argument("tabela_alvo", nargs="?", type=str)
 
     def importar_usuario(self, table: list[dict[str, str]]) -> None:
-        pass
+        print("user")
 
     def importar_historico(self, table: list[dict[str, str]]) -> None:
-        pass
+        print("hist")
 
     def importar_cliente(self, table: list[dict[str, str]]) -> None:
-        pass
+        print("cliente")
 
     def importar_tipodocumento(self, table: list[dict[str, str]]) -> None:
-        pass
+        print("td")
 
     def importar_documento(self, table: list[dict[str, str]]) -> None:
-        pass
+        print("doc")
 
     def handle(self, *args, **options):
         file_path = options["arquivo_json"]
@@ -37,18 +37,18 @@ class Command(BaseCommand):
             tabela_documentos = old_database["LAN_LANCAMENTO.sql"]
         match options.get("tabela_alvo", None):
             case "usuarios":
-                importar_usuario(tabela_usuarios)
+                self.importar_usuario(tabela_usuarios)
             case "historico":
-                importar_historico(tabela_historico)
-            case "cliente":
-                importar_cliente(tabela_clientes)
+                self.importar_historico(tabela_historico)
+            case "clientes":
+                self.importar_cliente(tabela_clientes)
             case "tipo_de_documento":
-                importar_tipodocumento(tabela_tipo_doc)
-            case "documento":
-                importar_documento(tabela_documentos)
+                self.importar_tipodocumento(tabela_tipo_doc)
+            case "documentos":
+                self.importar_documento(tabela_documentos)
             case _:
-                importar_usuario(tabela_usuarios)
-                importar_historico(tabela_historico)
-                importar_cliente(tabela_clientes)
-                importar_tipodocumento(tabela_tipo_doc)
-                importar_documento(tabela_documentos)
+                self.importar_usuario(tabela_usuarios)
+                self.importar_historico(tabela_historico)
+                self.importar_cliente(tabela_clientes)
+                self.importar_tipodocumento(tabela_tipo_doc)
+                self.importar_documento(tabela_documentos)
