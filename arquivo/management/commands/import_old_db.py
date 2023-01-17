@@ -3,6 +3,7 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
+from arquivo.models import TipoDeDocumento
 from django.contrib.auth.models import User
 
 
@@ -25,7 +26,8 @@ class Command(BaseCommand):
         print("cliente")
 
     def importar_tipodocumento(self, table: list[dict[str, str]]) -> None:
-        print("td")
+        documentos = [TipoDeDocumento(**d) for d in table]
+        TipoDeDocumento.objects.bulk_create(documentos)
 
     def importar_documento(self, table: list[dict[str, str]]) -> None:
         print("doc")
