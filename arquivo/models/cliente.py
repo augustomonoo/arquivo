@@ -21,7 +21,7 @@ class Cliente(models.Model):
     bairro = models.CharField(max_length=30, null=True)
 
     def __str__(self) -> str:
-        return f"{self.razao_social}"
+        return f"{self.razao_social or self.nome}"
 
     @classmethod
     def get_criar_url(cls) -> str:
