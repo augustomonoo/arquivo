@@ -3,10 +3,12 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
+from arquivo.models import Cliente
 from arquivo.models import TipoDeDocumento
 from django.contrib.auth.models import User
 
 
+# Tem problemas com timezones...
 class Command(BaseCommand):
     help = "Importa o banco de dados do sistema antigo a partir de um json."
 
@@ -23,7 +25,8 @@ class Command(BaseCommand):
         print("hist")
 
     def importar_cliente(self, table: list[dict[str, str]]) -> None:
-        print("cliente")
+        clientes = [Cliente(**c) for c in table]
+        Cliente.objects.bulk_create(clientes)
 
     def importar_tipodocumento(self, table: list[dict[str, str]]) -> None:
         documentos = [TipoDeDocumento(**d) for d in table]
