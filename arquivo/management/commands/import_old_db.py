@@ -3,6 +3,8 @@ import json
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
+from django.contrib.auth.models import User
+
 
 class Command(BaseCommand):
     help = "Importa o banco de dados do sistema antigo a partir de um json."
@@ -12,7 +14,9 @@ class Command(BaseCommand):
         parser.add_argument("tabela_alvo", nargs="?", type=str)
 
     def importar_usuario(self, table: list[dict[str, str]]) -> None:
-        print("user")
+        for usuario in table:
+            print(usuario)
+            User.objects.create_user(**usuario)
 
     def importar_historico(self, table: list[dict[str, str]]) -> None:
         print("hist")
@@ -48,7 +52,7 @@ class Command(BaseCommand):
                 self.importar_documento(tabela_documentos)
             case _:
                 self.importar_usuario(tabela_usuarios)
-                self.importar_historico(tabela_historico)
-                self.importar_cliente(tabela_clientes)
                 self.importar_tipodocumento(tabela_tipo_doc)
+                self.importar_cliente(tabela_clientes)
                 self.importar_documento(tabela_documentos)
+                self.importar_historico(tabela_historico)
