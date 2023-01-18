@@ -5,6 +5,7 @@ from django.core.management.base import CommandError
 
 from arquivo.models import Cliente
 from arquivo.models import Documento
+from arquivo.models import Historico
 from arquivo.models import TipoDeDocumento
 from django.contrib.auth.models import User
 
@@ -23,7 +24,8 @@ class Command(BaseCommand):
             User.objects.create_user(**usuario)
 
     def importar_historico(self, table: list[dict[str, str]]) -> None:
-        print("hist")
+        entradas = [Historico(**c) for c in table]
+        Historico.objects.bulk_create(entradas)
 
     def importar_cliente(self, table: list[dict[str, str]]) -> None:
         clientes = [Cliente(**c) for c in table]
