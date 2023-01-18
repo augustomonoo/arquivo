@@ -4,6 +4,7 @@ from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
 
 from arquivo.models import Cliente
+from arquivo.models import Documento
 from arquivo.models import TipoDeDocumento
 from django.contrib.auth.models import User
 
@@ -33,7 +34,8 @@ class Command(BaseCommand):
         TipoDeDocumento.objects.bulk_create(documentos)
 
     def importar_documento(self, table: list[dict[str, str]]) -> None:
-        print("doc")
+        documentos = [Documento(**d) for d in table]
+        Documento.objects.bulk_create(documentos)
 
     def handle(self, *args, **options):
         file_path = options["arquivo_json"]
