@@ -14,3 +14,4 @@ class Historico(models.Model):
     formulario = models.CharField(max_length=80)  # qual aba gerou isso
     # copia do nome do usuario que gerou o historico
     nome_user = models.CharField(max_length=80)
+    complemento = models.CharField(max_length=240, null=True)
