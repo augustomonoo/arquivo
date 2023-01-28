@@ -7,7 +7,9 @@ from arquivo.models import Cliente
 from arquivo.models import Documento
 from arquivo.models import Historico
 from arquivo.models import TipoDeDocumento
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 # Tem problemas com timezones...
@@ -37,6 +39,11 @@ class Command(BaseCommand):
         self._importar(Documento, table)
 
     def handle(self, *args, **options):
+        if User.objects.count() != 1 or User.objects.first().id != 1:
+            raise CommandError(
+                f"É necessário ter apenas um usuário no banco de dados. Esse usuário deve ter id=1."
+            )
+
         file_path = options["arquivo_json"]
         with open(file_path, "r") as f:
             old_database = json.loads(f.read())
@@ -45,6 +52,7 @@ class Command(BaseCommand):
             tabela_clientes = old_database["FIN_CLIENTES.sql"]
             tabela_tipo_doc = old_database["CAD_DESCRICAO.sql"]
             tabela_documentos = old_database["LAN_LANCAMENTO.sql"]
+
         match options.get("tabela_alvo", None):
             case "usuarios":
                 self.importar_usuario(tabela_usuarios)
