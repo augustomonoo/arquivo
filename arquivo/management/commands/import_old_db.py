@@ -18,26 +18,23 @@ class Command(BaseCommand):
         parser.add_argument("arquivo_json", type=str)
         parser.add_argument("tabela_alvo", nargs="?", type=str)
 
+    def _importar(self, klass, table: list[dict[str, str]]) -> None:
+        klass.objects.bulk_create([klass(**c) for c in table])
+
     def importar_usuario(self, table: list[dict[str, str]]) -> None:
-        for usuario in table:
-            print(usuario)
-            User.objects.create_user(**usuario)
+        self._importar(User, table)
 
     def importar_historico(self, table: list[dict[str, str]]) -> None:
-        entradas = [Historico(**c) for c in table]
-        Historico.objects.bulk_create(entradas)
+        self._importar(Historico, table)
 
     def importar_cliente(self, table: list[dict[str, str]]) -> None:
-        clientes = [Cliente(**c) for c in table]
-        Cliente.objects.bulk_create(clientes)
+        self._importar(Cliente, table)
 
     def importar_tipodocumento(self, table: list[dict[str, str]]) -> None:
-        documentos = [TipoDeDocumento(**d) for d in table]
-        TipoDeDocumento.objects.bulk_create(documentos)
+        self._importar(TipoDeDocumento, table)
 
     def importar_documento(self, table: list[dict[str, str]]) -> None:
-        documentos = [Documento(**d) for d in table]
-        Documento.objects.bulk_create(documentos)
+        self._importar(Documento, table)
 
     def handle(self, *args, **options):
         file_path = options["arquivo_json"]
