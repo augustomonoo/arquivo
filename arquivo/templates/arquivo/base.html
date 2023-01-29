@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="{% static 'arquivo/style.css' %}">
         <title>Document</title>
     </head>
-    <body class="bg-gray-200 dark:bg-gray-800 flex flex-row flex-nowrap">
+    <body class="bg-gray-200 dark:bg-gray-800 dark:text-white flex flex-row flex-nowrap">
         <nav class="p-2 bg-gray-400 dark:bg-gray-600 sm:w-6/12 md:w-4/12 lg:w-3/12 flex flex-col h-screen">
             {% comment %} nav_links são injetados no contexto via context_processor {% endcomment %}
             {% for nav_link in nav_links %}
