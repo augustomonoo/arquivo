@@ -8,7 +8,7 @@ from django.db.models import QuerySet
 
 
 class ConsultaBaseForm(forms.Form):
-    termos = forms.CharField(max_length=255)
+    s = forms.CharField(max_length=255, required=False)
 
     # lista de tuplas (campo, operador)
     # campo: nome do campo no modelo (atual ou relacionado)
@@ -16,10 +16,10 @@ class ConsultaBaseForm(forms.Form):
     campos_de_pesquisa = []
 
     def search(self, queryset: QuerySet) -> QuerySet:
-        termos = self.cleaned_data["termos"]
-        termos = termos.split()
+        s = self.cleaned_data["s"]
+        s = s.split()
         q = Q()
-        for termo in termos:
+        for termo in s:
             for campo, operador in self.campos_de_pesquisa:
                 q = q | Q(**{f"{campo}__{operador}": termo})
         return queryset.filter(q)
@@ -31,8 +31,9 @@ class ConsultaBaseForm(forms.Form):
 
 class ConsultaDocumentoForm(ConsultaBaseForm):
     campos_de_pesquisa = [
-        ("conteudo", "icontains"),
+        ("observacao", "icontains"),
         ("cliente__razao_social", "icontains"),
+        ("numero_caixa", "contains"),
     ]
 
 
