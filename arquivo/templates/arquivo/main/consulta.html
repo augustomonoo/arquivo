@@ -14,7 +14,7 @@
                 <th>Arquivado em</th>
             </tr>
         </thead>
-        {% for resultado in queryset %}
+        {% for resultado in object_list %}
             <tr>
                 <td>{{ resultado.arquivo }}</td>
                 <td>{{ resultado.cliente }}</td>
@@ -23,4 +23,11 @@
             </tr>
         {% endfor %}
     </table>
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}<a href="?page={{ page_obj.previous_page_number }}">Anterior</a>{% endif %}
+            <span class="current">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.</span>
+            {% if page_obj.has_next %}<a href="?page={{ page_obj.next_page_number }}">Próxima</a>{% endif %}
+        </span>
+    </div>
 {% endblock content %}
