@@ -1,8 +1,8 @@
 {% extends "arquivo/base.html" %}
 
 {% block content %}
-    <form action=".">
-        {% include "arquivo/components/form.html" %}
+    <form action="." class="flex items-center gap-2">
+        {% include "arquivo/components/form.html" with labels=False %}
         {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
     </form>
     <table>
