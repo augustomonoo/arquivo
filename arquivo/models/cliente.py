@@ -26,3 +26,17 @@ class Cliente(models.Model):
     @classmethod
     def get_criar_url(cls) -> str:
         return reverse_lazy("cliente_novo")
+
+    def save(self, *args, **kwargs):
+        attrs = (
+            "nome",
+            "cidade",
+            "sigla_estado",
+            "razao_social",
+            "atividade",
+            "endereco",
+            "bairro",
+        )
+        for a in attrs:
+            setattr(self, a, getattr(self, a).upper())
+        return super().save(*args, **kwargs)
