@@ -52,6 +52,12 @@ class DocumentoForm(forms.ModelForm):
             "cliente",
             "tipo_de_documento",
             "observacao",
+            "data_finalizacao",
+            "data_saida",
+            "data_arquivo",
+            "data_inicio",
+            "numero_caixa",
+            "cheia",
         ]
 
 

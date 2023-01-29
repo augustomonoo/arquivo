@@ -10,6 +10,7 @@ def nav_links(request) -> dict:
             {"href": reverse_lazy("main_index"), "text": "Início"},
             "Documentos",
             {"href": Documento.get_listar_url(), "text": "Consultar documentos"},
+            {"href": Documento.get_criar_url(), "text": "Novo Lançamento"},
             # "Arquivos",
             # {"href": Arquivo.get_criar_url(), "text": "Novo Arquivo"},
             # {"href": Arquivo.get_listar_url(), "text": "Consultar arquivos"},

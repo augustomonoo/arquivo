@@ -37,3 +37,7 @@ class Documento(models.Model):
     @classmethod
     def get_listar_url(cls):
         return reverse_lazy("documento_listar")
+
+    @classmethod
+    def get_criar_url(cls) -> str:
+        return reverse_lazy("documento_novo")
