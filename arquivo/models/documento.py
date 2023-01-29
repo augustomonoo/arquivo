@@ -29,6 +29,7 @@ class Documento(models.Model):
     class Meta:
         verbose_name = "documento"
         verbose_name_plural = "documentos"
+        ordering = ["-data_arquivo"]
 
     def __str__(self):
         return f"{self.tipo_de_documento} - {self.observacao}"
