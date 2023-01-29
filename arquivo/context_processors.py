@@ -14,6 +14,7 @@ def nav_links(request) -> dict:
             # {"href": Arquivo.get_criar_url(), "text": "Novo Arquivo"},
             # {"href": Arquivo.get_listar_url(), "text": "Consultar arquivos"},
             "Clientes",
+            {"href": Cliente.get_listar_url(), "text": "Consultar clientes"},
             {"href": Cliente.get_criar_url(), "text": "Novo Cliente"},
         ),
     }
