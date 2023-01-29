@@ -2,8 +2,12 @@
 
 {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
 {% for field in form.visible_fields %}
-    <div class="flex flex-col">
-        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-        {% render_field field class+="form-input rounded" placeholder=field.label %}
+    <div class="flex flex-col basis-full">
+        {% if labels %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
+        {% if placeholder %}
+            {% render_field field class+="form-input rounded" placeholder=field.label %}
+        {% else %}
+            {% render_field field class+="form-input rounded" %}
+        {% endif %}
     </div>
 {% endfor %}
