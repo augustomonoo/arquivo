@@ -35,6 +35,16 @@ class Cliente(models.Model):
     def get_criar_url(cls) -> str:
         return reverse_lazy("cliente_novo")
 
+    @classmethod
+    def get_listar_url(cls) -> str:
+        return reverse_lazy("cliente_listar")
+
+    def get_absolute_url(self):
+        return reverse_lazy("cliente_detalhe", kwargs={"pk": self.pk})
+
+    def get_detalhe_url(self):
+        return self.get_absolute_url()
+
     def save(self, *args, **kwargs):
         attrs = (
             "nome",

@@ -1,0 +1,17 @@
+{% extends 'arquivo/base.html' %}
+
+{% block content %}
+    <p>Nome: {{ cliente.nome }}</p>
+    <p>Telefone1: {{ cliente.telefone1 }}</p>
+    <p>Telefone_contato: {{ cliente.telefone_contato }}</p>
+    <p>Cep: {{ cliente.cep }}</p>
+    <p>Tipo_pessoa: {{ cliente.get_tipo_pessoa }}</p>
+    <p>Cidade: {{ cliente.cidade }}</p>
+    <p>Sigla_estado: {{ cliente.sigla_estado }}</p>
+    <p>CNPJ: {{ cliente.cnpj }}</p>
+    <p>Inscricao_estadual: {{ cliente.inscricao_estadual }}</p>
+    <p>Razao_social: {{ cliente.razao_social }}</p>
+    <p>Atividade: {{ cliente.atividade }}</p>
+    <p>Endereco: {{ cliente.endereco }}</p>
+    <p>Bairro: {{ cliente.bairro }}</p>
+{% endblock content %}
