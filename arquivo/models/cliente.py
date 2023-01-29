@@ -3,12 +3,20 @@ from django.urls import reverse_lazy
 
 
 class Cliente(models.Model):
-    data_cadastro = models.DateTimeField(null=True)
+    class TipoDePessoaChoices(models.TextChoices):
+        FISICA = "F", "Pessoa Física"
+        JURIDICA = "J", "Pessoa Jurídica"
+
+    data_cadastro = models.DateTimeField(null=True, auto_now_add=True)
     nome = models.CharField(max_length=120, null=True)
     telefone1 = models.CharField(max_length=16, null=True)
     telefone_contato = models.CharField(max_length=30, null=True)
     cep = models.CharField(max_length=9, null=True)
-    tipo_pessoa = models.CharField(max_length=1, default="F")
+    tipo_pessoa = models.CharField(
+        max_length=1,
+        choices=TipoDePessoaChoices.choices,
+        default=TipoDePessoaChoices.FISICA,
+    )
     cidade = models.CharField(max_length=30, null=True)
     sigla_estado = models.CharField(max_length=2, null=True)
     cnpj = models.CharField(max_length=20, null=True)
