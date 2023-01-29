@@ -7,6 +7,8 @@ from arquivo.views import main
 
 
 cliente_patterns = [
+    path("", cliente.cliente_listar, name="cliente_listar"),
+    path("<int:pk>/", cliente.cliente_detalhe, name="cliente_detalhe"),
     path("novo/", cliente.cliente_novo, name="cliente_novo"),
 ]
 
