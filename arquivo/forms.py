@@ -37,6 +37,14 @@ class ConsultaDocumentoForm(ConsultaBaseForm):
     ]
 
 
+class ConsultaClienteForm(ConsultaBaseForm):
+    campos_de_pesquisa = [
+        ("razao_social", "icontains"),
+        ("nome", "icontains"),
+        ("cnpj", "icontains"),
+    ]
+
+
 class DocumentoForm(forms.ModelForm):
     class Meta:
         model = Documento
@@ -50,4 +58,4 @@ class DocumentoForm(forms.ModelForm):
 class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
-        fields = ["razao_social"]
+        exclude = ["data_cadastro"]
