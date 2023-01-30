@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
@@ -11,6 +12,7 @@ from arquivo.models import Historico
 from arquivo.views.utils import paginate
 
 
+@login_required
 def novo(request, id: int = None) -> HttpResponse:
     form = DocumentoForm(
         request.POST or None, instance=Documento.objects.get(id=id) if id else None
@@ -37,6 +39,7 @@ def novo(request, id: int = None) -> HttpResponse:
     return render(request, "arquivo/documento/novo.html", contexto)
 
 
+@login_required
 def detalhe(request, id: int) -> HttpResponse:
     documento = get_object_or_404(Documento, id=id)
     contexto = {
@@ -46,6 +49,7 @@ def detalhe(request, id: int) -> HttpResponse:
     return render(request, "arquivo/documento/detalhe.html", contexto)
 
 
+@login_required
 def listar(request, cliente_id: int = None) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
     if cliente_id:
