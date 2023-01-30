@@ -8,25 +8,25 @@ class Cliente(models.Model):
         JURIDICA = "J", "Pessoa Jurídica"
 
     data_cadastro = models.DateTimeField(null=True, auto_now_add=True)
-    nome = models.CharField(max_length=120, null=True)
-    telefone1 = models.CharField(max_length=16, null=True)
-    telefone_contato = models.CharField(max_length=30, null=True)
-    cep = models.CharField(max_length=9, null=True)
+    nome = models.CharField(max_length=120, null=True, blank=True)
+    telefone1 = models.CharField(max_length=16, null=True, blank=True)
+    telefone_contato = models.CharField(max_length=30, null=True, blank=True)
+    cep = models.CharField(max_length=9, null=True, blank=True)
     tipo_pessoa = models.CharField(
         max_length=1,
         choices=TipoDePessoaChoices.choices,
         default=TipoDePessoaChoices.FISICA,
     )
-    cidade = models.CharField(max_length=30, null=True)
-    sigla_estado = models.CharField(max_length=2, null=True)
-    cnpj = models.CharField(max_length=20, null=True)
-    inscricao_estadual = models.CharField(max_length=20, null=True)
+    cidade = models.CharField(max_length=30, null=True, blank=True)
+    sigla_estado = models.CharField(max_length=2, null=True, blank=True)
+    cnpj = models.CharField(max_length=20, null=True, blank=True)
+    inscricao_estadual = models.CharField(max_length=20, null=True, blank=True)
     razao_social = models.CharField(
-        max_length=512, verbose_name="razão social", null=True
+        max_length=512, verbose_name="razão social", null=True, blank=True
     )
-    atividade = models.CharField(max_length=250, null=True)
-    endereco = models.CharField(max_length=60, null=True)
-    bairro = models.CharField(max_length=30, null=True)
+    atividade = models.CharField(max_length=250, null=True, blank=True)
+    endereco = models.CharField(max_length=60, null=True, blank=True)
+    bairro = models.CharField(max_length=30, null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.razao_social or self.nome}"
