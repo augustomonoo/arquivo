@@ -17,7 +17,8 @@ def novo(request, id: int = None) -> HttpResponse:
     )
     if form.is_valid():
         documento = form.save(commit=False)
-        documento.user = request.user
+        if not id:
+            documento.user = request.user
         documento.save()
         # Sincronizar o estado da caixa com outros documentos que usam o mesmo
         # numero de caixa
