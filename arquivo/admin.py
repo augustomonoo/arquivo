@@ -23,4 +23,4 @@ class LancamentoAdmin(admin.ModelAdmin):
 
 @admin.register(Historico)
 class HitoricoAdmin(admin.ModelAdmin):
-    pass
+    list_display = ("user", "nome_user", "formulario", "descricao")
