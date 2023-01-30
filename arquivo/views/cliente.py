@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from arquivo.forms import ClienteForm, ConsultaClienteForm
 from arquivo.models import Cliente
+from arquivo.models import Historico
 from arquivo.views.utils import paginate
 
 
@@ -37,6 +38,10 @@ def cliente_novo(request, id: int = None) -> HttpResponse:
     )
     if form.is_valid():
         cliente = form.save()
+        historico = Historico(user=request.user, nome_user=request.user.get_full_name())
+        historico.formulario = "editar cliente" if id else "novo cliente"
+        historico.descricao = f"id: {cliente.id}\nnome: {cliente}"
+        historico.save()
         return redirect(cliente.get_detalhe_url())
     contexto = {
         "Cliente": Cliente,
