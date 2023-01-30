@@ -16,15 +16,15 @@ class Documento(models.Model):
         on_delete=models.DO_NOTHING,
     )
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True)
-    data_finalizacao = models.DateTimeField(null=True)
-    data_saida = models.DateTimeField(null=True)
+    data_finalizacao = models.DateTimeField(null=True, blank=True)
+    data_saida = models.DateTimeField(null=True, blank=True)
     cliente = models.ForeignKey(
         Cliente, verbose_name="cliente", on_delete=models.DO_NOTHING
     )
-    observacao = models.CharField(max_length=230, null=True)
+    observacao = models.CharField(max_length=230, null=True, blank=True)
     cheia = models.BooleanField(default=False)
-    data_arquivo = models.DateTimeField(null=True)
-    data_inicio = models.DateTimeField(null=True)
+    data_arquivo = models.DateTimeField(null=True, blank=True)
+    data_inicio = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         verbose_name = "documento"
