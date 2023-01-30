@@ -89,3 +89,21 @@ O CSS do app precisa ser gerado utilizando o tailwindcss.
 ```bash
 npx tailwindcss -i arquivo/static/arquivo/base.css -o arquivo/static/arquivo/style.css --watch
 ```
+
+
+### Configurando o login do sistema
+1 - Incluir no config/settings.py:
+```LOGIN_URL = "/accounts/login/"
+```
+2 - Incluir no config/urls.py:
+```from django.contrib.auth import views as auth_views
+...
+urlpatterns = [
+...
+    path("accounts/login/", auth_views.LoginView.as_view(next_page="/", redirect_field_name="next"),),
+...
+]
+...
+
+```
+
