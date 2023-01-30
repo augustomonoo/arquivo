@@ -31,11 +31,13 @@ def cliente_detalhe(request, pk: int) -> HttpResponse:
     return render(request, "arquivo/cliente/detalhe.html", contexto)
 
 
-def cliente_novo(request) -> HttpResponse:
-    form = ClienteForm(request.POST or None)
+def cliente_novo(request, id: int = None) -> HttpResponse:
+    form = ClienteForm(
+        request.POST or None, instance=Cliente.objects.get(id=id) if id else None
+    )
     if form.is_valid():
         cliente = form.save()
-        return redirect(cliente.get_editar_url())
+        return redirect(cliente.get_detalhe_url())
     contexto = {
         "Cliente": Cliente,
         "form": form,
