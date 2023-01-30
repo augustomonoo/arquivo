@@ -10,6 +10,7 @@ cliente_patterns = [
     path("", cliente.cliente_listar, name="cliente_listar"),
     path("<int:pk>/", cliente.cliente_detalhe, name="cliente_detalhe"),
     path("<int:id>/editar/", cliente.cliente_novo, name="cliente_editar"),
+    path("<int:cliente_id>/documentos/", documento.listar, name="cliente_documentos"),
     path("novo/", cliente.cliente_novo, name="cliente_novo"),
 ]
 
