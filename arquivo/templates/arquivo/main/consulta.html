@@ -12,6 +12,7 @@
                 <th>ID Documento</th>
                 <th>Caixa</th>
                 <th>Cliente</th>
+                <th>Tipo</th>
                 <th>Observacao</th>
                 <th>Arquivado em</th>
             </tr>
@@ -34,6 +35,7 @@
                 <td>{{ resultado.id }}</td>
                 <td>{{ resultado.numero_caixa|floatformat }}</td>
                 <td>{{ resultado.cliente }}</td>
+                <td>{{ resultado.tipo_de_documento }}</td>
                 <td>{{ resultado.observacao|default:"" }}</td>
                 <td>{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
             </tr>
