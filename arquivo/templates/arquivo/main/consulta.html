@@ -8,6 +8,7 @@
     <table>
         <thead>
             <tr>
+                <th>ID Documento</th>
                 <th>Caixa</th>
                 <th>Cliente</th>
                 <th>Observacao</th>
@@ -16,6 +17,7 @@
         </thead>
         {% for resultado in object_list %}
             <tr>
+                <td>{{ resultado.id }}</td>
                 <td>{{ resultado.numero_caixa|floatformat }}</td>
                 <td>{{ resultado.cliente }}</td>
                 <td>{{ resultado.observacao }}</td>
