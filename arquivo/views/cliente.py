@@ -1,14 +1,19 @@
 from audioop import reverse
 
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.shortcuts import render
 
-from arquivo.forms import ClienteForm, ConsultaClienteForm
+from arquivo.forms import ClienteForm
+from arquivo.forms import ConsultaClienteForm
 from arquivo.models import Cliente
 from arquivo.models import Historico
 from arquivo.views.utils import paginate
 
 
+@login_required
 def cliente_listar(request) -> HttpResponse:
     queryset = Cliente.objects.all()
     form = ConsultaClienteForm(request.GET or None)
@@ -23,6 +28,7 @@ def cliente_listar(request) -> HttpResponse:
     return render(request, "arquivo/cliente/listar.html", contexto)
 
 
+@login_required
 def cliente_detalhe(request, pk: int) -> HttpResponse:
     cliente = get_object_or_404(Cliente, pk=pk)
     contexto = {
@@ -32,6 +38,7 @@ def cliente_detalhe(request, pk: int) -> HttpResponse:
     return render(request, "arquivo/cliente/detalhe.html", contexto)
 
 
+@login_required
 def cliente_novo(request, id: int = None) -> HttpResponse:
     form = ClienteForm(
         request.POST or None, instance=Cliente.objects.get(id=id) if id else None
