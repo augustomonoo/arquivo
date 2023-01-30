@@ -17,6 +17,8 @@ def nav_links(request) -> dict:
             "Clientes",
             {"href": Cliente.get_listar_url(), "text": "Consultar clientes"},
             {"href": Cliente.get_criar_url(), "text": "Novo Cliente"},
+            "Conta",
+            {"href": reverse_lazy("logout"), "text": "Sair"},
         ),
     }
 
