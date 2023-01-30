@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
@@ -33,6 +34,15 @@ def novo(request, id: int = None) -> HttpResponse:
         "form": form,
     }
     return render(request, "arquivo/documento/novo.html", contexto)
+
+
+def detalhe(request, id: int) -> HttpResponse:
+    documento = get_object_or_404(Documento, id=id)
+    contexto = {
+        "Documento": Documento,
+        "documento": documento,
+    }
+    return render(request, "arquivo/documento/detalhe.html", contexto)
 
 
 def listar(request) -> HttpResponse:
