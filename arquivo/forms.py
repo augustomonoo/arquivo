@@ -34,6 +34,7 @@ class ConsultaDocumentoForm(ConsultaBaseForm):
         ("observacao", "icontains"),
         ("cliente__razao_social", "icontains"),
         ("numero_caixa", "contains"),
+        ("tipo_de_documento__descricao", "icontains"),
     ]
 
 
@@ -59,6 +60,10 @@ class DocumentoForm(forms.ModelForm):
             "numero_caixa",
             "cheia",
         ]
+        widgets = {
+            "data_arquivo": forms.DateInput(attrs={"type": "date"}),
+            "data_inicio": forms.DateInput(attrs={"type": "date"}),
+        }
 
 
 class ClienteForm(forms.ModelForm):
