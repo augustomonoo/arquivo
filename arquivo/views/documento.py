@@ -6,6 +6,7 @@ from django.shortcuts import render
 from arquivo.forms import ConsultaDocumentoForm
 from arquivo.forms import DocumentoForm
 from arquivo.models import Documento
+from arquivo.models import Historico
 from arquivo.views.utils import paginate
 
 
@@ -22,6 +23,11 @@ def novo(request, id: int = None) -> HttpResponse:
         Documento.objects.filter(numero_caixa=documento.numero_caixa).update(
             cheia=documento.cheia
         )
+        historico = Historico(user=request.user, nome_user=request.user.get_full_name())
+        historico.formulario = "editar documento" if id else "novo cliente"
+        historico.descricao = f"id: {documento.id}"
+        historico.save()
+        return redirect(documento.get_detalhe_url())
     contexto = {
         "Documento": Documento,
         "form": form,
