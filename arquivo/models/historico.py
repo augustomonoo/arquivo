@@ -10,8 +10,8 @@ class Historico(models.Model):
 
     user = models.ForeignKey(User, null=True, on_delete=models.DO_NOTHING)
     descricao = models.CharField(max_length=100)
-    data = models.DateTimeField()
+    data = models.DateTimeField(auto_now_add=True)
     formulario = models.CharField(max_length=80)  # qual aba gerou isso
     # copia do nome do usuario que gerou o historico
-    nome_user = models.CharField(max_length=80)
-    complemento = models.CharField(max_length=240, null=True)
+    nome_user = models.CharField(max_length=80, blank=True)
+    complemento = models.CharField(max_length=240, null=True, blank=True)
