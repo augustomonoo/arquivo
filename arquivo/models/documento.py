@@ -23,7 +23,7 @@ class Documento(models.Model):
     )
     observacao = models.CharField(max_length=230, null=True, blank=True)
     cheia = models.BooleanField(default=False)
-    data_arquivo = models.DateTimeField(null=True, blank=True)
+    data_arquivo = models.DateTimeField(null=True, blank=True, auto_now_add=True)
     data_inicio = models.DateTimeField(null=True, blank=True)
 
     class Meta:
