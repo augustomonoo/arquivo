@@ -16,6 +16,8 @@ cliente_patterns = [
 documento_patterns = [
     path("", documento.listar, name="documento_listar"),
     path("novo/", documento.novo, name="documento_novo"),
+    path("<int:id>/", documento.detalhe, name="documento_detalhe"),
+    path("<int:id>/editar/", documento.novo, name="documento_editar"),
 ]
 
 main_patterns = [
