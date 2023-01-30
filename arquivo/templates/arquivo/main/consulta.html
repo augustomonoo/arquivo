@@ -34,7 +34,7 @@
                 <td>{{ resultado.id }}</td>
                 <td>{{ resultado.numero_caixa|floatformat }}</td>
                 <td>{{ resultado.cliente }}</td>
-                <td>{{ resultado.observacao }}</td>
+                <td>{{ resultado.observacao|default:"" }}</td>
                 <td>{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
             </tr>
         {% endfor %}

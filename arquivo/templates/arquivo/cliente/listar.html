@@ -29,8 +29,8 @@
                             </svg>
                         </a>
                     </td>
-                    <td>{{ obj.nome }}</td>
-                    <td>{{ obj.razao_social }}</td>
+                    <td>{{ obj.nome|default:"---" }}</td>
+                    <td>{{ obj.razao_social|default:"---" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
