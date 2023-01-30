@@ -28,6 +28,9 @@ class Cliente(models.Model):
     endereco = models.CharField(max_length=60, null=True, blank=True)
     bairro = models.CharField(max_length=30, null=True, blank=True)
 
+    class Meta:
+        ordering = ["nome", "razao_social"]
+
     def __str__(self) -> str:
         return f"{self.razao_social or self.nome}"
 
