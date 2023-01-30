@@ -55,6 +55,5 @@ class Cliente(models.Model):
             "endereco",
             "bairro",
         )
-        for a in attrs:
-            setattr(self, a, getattr(self, a).upper())
+        [setattr(self, a, getattr(self, a).upper()) for a in attrs if getattr(self, a)]
         return super().save(*args, **kwargs)
