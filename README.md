@@ -93,10 +93,12 @@ npx tailwindcss -i arquivo/static/arquivo/base.css -o arquivo/static/arquivo/sty
 
 ### Configurando o login do sistema
 1 - Incluir no config/settings.py:
-```LOGIN_URL = "/accounts/login/"
+```python
+LOGIN_URL = "/accounts/login/"
 ```
 2 - Incluir no config/urls.py:
-```from django.contrib.auth import views as auth_views
+```python
+from django.contrib.auth import views as auth_views
 ...
 urlpatterns = [
 ...
