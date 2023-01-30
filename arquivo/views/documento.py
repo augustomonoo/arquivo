@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.shortcuts import render
 
 from arquivo.forms import ConsultaDocumentoForm
@@ -8,15 +9,19 @@ from arquivo.models import Documento
 from arquivo.views.utils import paginate
 
 
-def novo(request) -> HttpResponse:
-    form = DocumentoForm(request.POST or None)
+def novo(request, id: int = None) -> HttpResponse:
+    form = DocumentoForm(
+        request.POST or None, instance=Documento.objects.get(id=id) if id else None
+    )
     if form.is_valid():
         documento = form.save(commit=False)
         documento.user = request.user
+        documento.save()
         # Sincronizar o estado da caixa com outros documentos que usam o mesmo
         # numero de caixa
-        documento.save()
-        return redirect(documento.get_editar_url())
+        Documento.objects.filter(numero_caixa=documento.numero_caixa).update(
+            cheia=documento.cheia
+        )
     contexto = {
         "Documento": Documento,
         "form": form,
