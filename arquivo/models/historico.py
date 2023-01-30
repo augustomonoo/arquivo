@@ -15,3 +15,13 @@ class Historico(models.Model):
     # copia do nome do usuario que gerou o historico
     nome_user = models.CharField(max_length=80, blank=True)
     complemento = models.CharField(max_length=240, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        attrs = (
+            "descricao",
+            "formulario",
+            "nome_user",
+            "complemento",
+        )
+        [setattr(self, a, getattr(self, a).upper()) for a in attrs if getattr(self, a)]
+        return super().save(*args, **kwargs)
