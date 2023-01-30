@@ -46,9 +46,12 @@ def detalhe(request, id: int) -> HttpResponse:
     return render(request, "arquivo/documento/detalhe.html", contexto)
 
 
-def listar(request) -> HttpResponse:
+def listar(request, cliente_id: int = None) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
-    queryset = Documento.objects.all()
+    if cliente_id:
+        queryset = Documento.objects.filter(cliente_id=cliente_id)
+    else:
+        queryset = Documento.objects.all()
     if form.is_valid():
         queryset = form.search(queryset)
     contexto = {
