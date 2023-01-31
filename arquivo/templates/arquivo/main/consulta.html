@@ -5,21 +5,21 @@
         {% include "arquivo/components/form.html" with labels=False %}
         {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
     </form>
-    <table>
-        <thead>
+    <table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+        <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
-                <th class="w-6"></th>
-                <th>ID Documento</th>
-                <th>Caixa</th>
-                <th>Cliente</th>
-                <th>Tipo</th>
-                <th>Observacao</th>
-                <th>Arquivado em</th>
+                <th class="border w-6"></th>
+                <th class="border">ID Documento</th>
+                <th class="border">Caixa</th>
+                <th class="border">Cliente</th>
+                <th class="border">Tipo</th>
+                <th class="border">Observacao</th>
+                <th class="border">Arquivado em</th>
             </tr>
         </thead>
         {% for resultado in object_list %}
-            <tr>
-                <td>
+            <tr class="border">
+                <td class="border">
                     <a href="{{ resultado.get_detalhe_url }}" class="flex w-auto h-auto">
                         <svg xmlns="http://www.w3.org/2000/svg"
                              fill="none"
@@ -32,12 +32,12 @@
                         </svg>
                     </a>
                 </td>
-                <td>{{ resultado.id }}</td>
-                <td>{{ resultado.numero_caixa|floatformat }}</td>
-                <td>{{ resultado.cliente }}</td>
-                <td>{{ resultado.tipo_de_documento }}</td>
-                <td>{{ resultado.observacao|default:"" }}</td>
-                <td>{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
+                <td class="border">{{ resultado.id }}</td>
+                <td class="border">{{ resultado.numero_caixa|floatformat }}</td>
+                <td class="border">{{ resultado.cliente }}</td>
+                <td class="border">{{ resultado.tipo_de_documento }}</td>
+                <td class="border">{{ resultado.observacao }}</td>
+                <td class="border">{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
             </tr>
         {% endfor %}
     </table>
