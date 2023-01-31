@@ -5,18 +5,18 @@
         {% include "arquivo/components/form.html" with labels=False %}
         {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
     </form>
-    <table>
-        <thead>
+    <table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+        <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
-                <th class="w-6"></th>
-                <th>Nome</th>
-                <th>Razão Social</th>
+                <th class="border w-6"></th>
+                <th class="border">Nome</th>
+                <th class="border">Razão Social</th>
             </tr>
         </thead>
         <tbody>
             {% for obj in object_list %}
-                <tr>
-                    <td>
+                <tr class="border">
+                    <td class="border">
                         <a href="{{ obj.get_detalhe_url }}" class="flex w-auto h-auto">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
@@ -29,8 +29,8 @@
                             </svg>
                         </a>
                     </td>
-                    <td>{{ obj.nome|default:"---" }}</td>
-                    <td>{{ obj.razao_social|default:"---" }}</td>
+                    <td class="border">{{ obj.nome|default:"---" }}</td>
+                    <td class="border">{{ obj.razao_social|default:"---" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
