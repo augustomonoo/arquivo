@@ -63,4 +63,4 @@ def listar(request, cliente_id: int = None) -> HttpResponse:
         "queryset": queryset,
         **paginate(queryset, page_number=request.GET.get("page")),
     }
-    return render(request, "arquivo/main/consulta.html", contexto)
+    return render(request, "arquivo/documento/listar.html", contexto)
