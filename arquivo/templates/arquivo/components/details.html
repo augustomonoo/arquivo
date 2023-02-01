@@ -2,7 +2,7 @@
 
 {% for field, value in fields.items %}
     <p id="field-{{ field }}">
-        <div id="field-{{ field }}-name" class="inline font-bold">{{ field }}:</div>
+        <div id="field-{{ field }}-name" class="inline font-bold">{{ field|title }}:</div>
         <div id="field-{{ field }}-value" class="inline">{{ value|default:"---" }}</div>
     </p>
 {% endfor %}
