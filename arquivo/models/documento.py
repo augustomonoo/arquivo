@@ -45,5 +45,8 @@ class Documento(models.Model):
     def get_absolute_url(self) -> str:
         return reverse_lazy("documento_detalhe", kwargs={"id": self.id})
 
+    def get_edit_url(self):
+        return reverse_lazy("documento_editar", kwargs={"id": self.id})
+
     def get_detalhe_url(self) -> str:
         return self.get_absolute_url()
