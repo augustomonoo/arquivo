@@ -1,20 +1,44 @@
 {% extends "arquivo/base.html" %}
 
 {% block content %}
-    {% for arquivo in arquivos %}
-        <div class="border rounded bg-slate-300 p-2 mb-2 mx-auto flex flex-row flex-wrap justify-between">
-            <h3 class="text-xl font-bold">{{ arquivo }}</h3>
-            {% if arquivo.fechado %}
-                <p class="rounded bg-red-500 p-2 font-bold text-white">Fechado</p>
-            {% else %}
-                <p class="rounded bg-green-500 p-2 font-bold text-black">Disponível</p>
-            {% endif %}
-            <div class="w-full">
-                {% include "arquivo/components/anchor_button.html" with href=arquivo.get_adicionar_documento_url text="Adicionar documento" %}
-                <ul class="list-disc list-inside">
-                    {% for documento in arquivo.documento_set.all %}<li>{{ documento.cliente }} - {{ documento.conteudo }}</li>{% endfor %}
-                </ul>
-            </div>
-        </div>
-    {% endfor %}
+    <form action="." class="flex items-center gap-2 justify-around mx-auto my-2">
+        {% comment %} flex justify-around w-96 mx-auto items-center my-2 {% endcomment %}
+        {% include "arquivo/components/form.html" with labels=False %}
+        {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
+    </form>
+    {% include "arquivo/components/pagination.html" %}
+    <table class="border-collapse border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-xs shadow-sm overflow-x-auto table-fixed w-full resize-none">
+        <thead class="bg-slate-50 dark:bg-slate-700">
+            <tr>
+                <th class="border w-6"></th>
+                <th class="border w-12">Caixa</th>
+                <th class="border w-72">Cliente</th>
+                <th class="border w-64">Tipo</th>
+                <th class="border w-72">Observação</th>
+                <th class="border w-24">Arquivado em</th>
+            </tr>
+        </thead>
+        {% for resultado in object_list %}
+            <tr class="border h-8">
+                <td class="border p-1">
+                    <a href="{{ resultado.get_detalhe_url }}" class="flex w-auto h-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             strokeWidth
+                             1.5
+                             stroke="currentColor"
+                             className="w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                        </svg>
+                    </a>
+                </td>
+                <td class="border p-1">{{ resultado.numero_caixa|floatformat }}</td>
+                <td class="border p-1">{{ resultado.cliente }}</td>
+                <td class="border p-1">{{ resultado.tipo_de_documento }}</td>
+                <td class="border p-1">{{ resultado.observacao|default:"" }}</td>
+                <td class="border p-1">{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock content %}
