@@ -1,6 +1,6 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    {% include "arquivo/components/details.html" with fields=documento_campos%}
+    {% include "arquivo/components/details.html" with fields=documento.get_dict_field%}
     {% include "arquivo/components/anchor_button.html" with href=documento.get_edit_url text="Editar" %}
 {% endblock content %}

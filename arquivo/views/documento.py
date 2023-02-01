@@ -45,9 +45,6 @@ def detalhe(request, id: int) -> HttpResponse:
     contexto = {
         "Documento": Documento,
         "documento": documento,
-        "documento_campos": {
-            k: v for k, v in documento.__dict__.items() if k != "_state"
-        },
     }
     return render(request, "arquivo/documento/detalhe.html", contexto)
 

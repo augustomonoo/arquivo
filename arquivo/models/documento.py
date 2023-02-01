@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse_lazy
+from typing import Any
 
 
 from django.contrib.auth.models import User
@@ -50,3 +51,6 @@ class Documento(models.Model):
 
     def get_detalhe_url(self) -> str:
         return self.get_absolute_url()
+
+    def get_dict_field(self) -> dict[str, Any]:
+        return {k: v for k, v in self.__dict__.items() if k != "_state"}
