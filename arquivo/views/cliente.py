@@ -31,11 +31,9 @@ def cliente_listar(request) -> HttpResponse:
 @login_required
 def cliente_detalhe(request, pk: int) -> HttpResponse:
     cliente = get_object_or_404(Cliente, pk=pk)
-    print(dir(cliente))
     contexto = {
         "Cliente": Cliente,
         "cliente": cliente,
-        "cliente_campos": {k: v for k, v in cliente.__dict__.items() if k != "_state"},
     }
     return render(request, "arquivo/cliente/detalhe.html", contexto)
 
