@@ -53,4 +53,5 @@ class Documento(models.Model):
         return self.get_absolute_url()
 
     def get_dict_field(self) -> dict[str, Any]:
-        return {k: v for k, v in self.__dict__.items() if k != "_state"}
+        fields = [f for f in self._meta.get_fields() if hasattr(f, "verbose_name")]
+        return {f.verbose_name: f.value_from_object(self) for f in fields}
