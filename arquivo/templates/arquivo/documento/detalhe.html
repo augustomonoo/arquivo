@@ -1,15 +1,6 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    <p>Numero Caixa: {{ documento.numero_caixa }}</p>
-    <p>Tipo de Documento: {{ documento.tipo_de_documento }}</p>
-    <p>Usuario: {{ documento.user }}</p>
-    <p>Data Finalizacao: {{ documento.data_finalizacao }}</p>
-    <p>Data Saida: {{ documento.data_saida }}</p>
-    <p>Cliente: {{ documento.cliente }}</p>
-    <p>Observacao: {{ documento.observacao }}</p>
-    <p>Cheia: {{ documento.cheia }}</p>
-    <p>Data Arquivo: {{ documento.data_arquivo }}</p>
-    <p>Data Inicio: {{ documento.data_inicio }}</p>
-    <a href="{% url 'documento_editar' id=documento.id %}">Editar</a>
+    {% include "arquivo/components/details.html" with fields=documento_campos%}
+    {% include "arquivo/components/anchor_button.html" with href=documento.get_edit_url text="Editar" %}
 {% endblock content %}
