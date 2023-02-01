@@ -36,7 +36,7 @@
                 <td class="border">{{ resultado.numero_caixa|floatformat }}</td>
                 <td class="border">{{ resultado.cliente }}</td>
                 <td class="border">{{ resultado.tipo_de_documento }}</td>
-                <td class="border">{{ resultado.observacao }}</td>
+                <td class="border">{{ resultado.observacao|default:"" }}</td>
                 <td class="border">{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
             </tr>
         {% endfor %}
