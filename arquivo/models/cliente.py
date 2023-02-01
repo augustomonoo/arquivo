@@ -52,6 +52,9 @@ class Cliente(models.Model):
     def get_edit_url(self):
         return reverse_lazy("cliente_editar", kwargs={"id": self.id})
 
+    def get_document_list_url(self) -> str:
+        return reverse_lazy("cliente_documentos", kwargs={"cliente_id": self.id})
+
     def get_dict_field(self) -> dict[str, Any]:
         return {k: v for k, v in self.__dict__.items() if k != "_state"}
 
