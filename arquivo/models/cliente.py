@@ -48,6 +48,9 @@ class Cliente(models.Model):
     def get_detalhe_url(self):
         return self.get_absolute_url()
 
+    def get_edit_url(self):
+        return reverse_lazy("cliente_editar", kwargs={"id": self.id})
+
     def save(self, *args, **kwargs):
         attrs = (
             "nome",
