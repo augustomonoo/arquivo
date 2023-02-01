@@ -1,2 +1,2 @@
 <a href="{{ href }}"
-   class="rounded ring-1 ring-blue-500 p-1 font-bold text-white bg-blue-400 hover:text-black hover:bg-blue-400">{{ text }}</a>
+   class="rounded ring-1 ring-blue-500 p-1 font-bold text-{{ text_color|default:"white" }} {{ bg_color|default:"bg-blue-400" }} hover:text-black hover:{{ bg_color|default:"bg-blue-400" }}">{{ text }}</a>
