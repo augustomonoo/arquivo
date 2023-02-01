@@ -1,7 +1,32 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    {% include "arquivo/components/details.html" with fields=cliente.get_dict_field%}
-    {% include "arquivo/components/anchor_button.html" with href=cliente.get_edit_url text="Editar" %}
-    {% include "arquivo/components/anchor_button.html" with href=cliente.get_document_list_url text="Documentos" %}
+    <section id="cliente-detalhe" class="my-2 mx-auto lg:w-3/4">
+        <h1 class="text-lg font-bold my-2">{{ cliente }}</h1>
+        <h2 class="font-bold border-dashed border-b-2 my-1">Dados cadastrais</h2>
+        <p>{{ cliente.get_tipo_pessoa_display }}</p>
+        <p>CNPJ/CPF: {{ cliente.cnpj|default:"Não informado" }}</p>
+        <p>Inscrição Estadual: {{ cliente.inscricao_estadual|default:"Não informado" }}</p>
+        {% if cliente.atividade %}<p class="italic">Atividade: {{ cliente.atividade }}</p>{% endif %}
+        <h2 class="font-bold border-dashed border-b-2 my-1 ">Contato</h2>
+        <ul>
+            <li>Telefone 1: {{ cliente.telefone1|default:"---" }}</li>
+            <li>Telefone 2: {{ cliente.telefone_contato|default:"---" }}</li>
+        </ul>
+        <h2 class="font-bold border-dashed border-b-2 my-1 ">Endereço</h2>
+        <p>
+            Logradouro: {{ cliente.endereco|default:"---" }}
+            <br>
+            Bairro: {{ cliente.bairro|default:"---" }}
+            <br>
+            Cidade: {{ cliente.cidade|default:"---" }}
+            <br>
+            Estado: {{ cliente.sigla_estado|default:"---" }}
+            <br>
+        </p>
+    </section>
+    <section id="acoes" class="my-2 flex gap-2 justify-end mx-auto lg:w-3/4">
+        {% include "arquivo/components/anchor_button.html" with href=cliente.get_edit_url text="Editar" bg_color="bg-red-400" %}
+        {% include "arquivo/components/anchor_button.html" with href=cliente.get_document_list_url text="Consultar Documentos" %}
+    </section>
 {% endblock content %}
