@@ -1,22 +1,23 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    <form action="." class="flex items-center gap-2">
+    <form action="." class="flex items-center gap-2 justify-around mx-auto my-2">
         {% include "arquivo/components/form.html" with labels=False %}
         {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
     </form>
-    <table class="border-collapse w-full border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-sm shadow-sm">
+    {% include "arquivo/components/pagination.html" %}
+    <table class="border-collapse border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-xs shadow-sm overflow-x-auto table-fixed w-full resize-none">
         <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
                 <th class="border w-6"></th>
-                <th class="border">Nome</th>
-                <th class="border">Razão Social</th>
+                <th class="border w-90">Nome</th>
+                <th class="border w-90">Razão Social</th>
             </tr>
         </thead>
         <tbody>
             {% for obj in object_list %}
-                <tr class="border">
-                    <td class="border">
+                <tr class="border h-8">
+                    <td class="border p-1">
                         <a href="{{ obj.get_detalhe_url }}" class="flex w-auto h-auto">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                  fill="none"
@@ -29,11 +30,10 @@
                             </svg>
                         </a>
                     </td>
-                    <td class="border">{{ obj.nome|default:"---" }}</td>
-                    <td class="border">{{ obj.razao_social|default:"---" }}</td>
+                    <td class="border p-1">{{ obj.nome|default:"---" }}</td>
+                    <td class="border p-1">{{ obj.razao_social|default:"---" }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-    {% include "arquivo/components/pagination.html" %}
 {% endblock content %}
