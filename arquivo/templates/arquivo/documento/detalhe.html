@@ -1,6 +1,10 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    {% include "arquivo/components/details.html" with fields=documento.get_dict_field%}
-    {% include "arquivo/components/anchor_button.html" with href=documento.get_edit_url text="Editar" %}
+    <section id="cliente-detalhe" class="my-2 mx-auto lg:w-3/4">
+        {% include "arquivo/components/details.html" with fields=documento.get_dict_field%}
+    </section>
+    <section id="acoes" class="my-2 flex gap-2 justify-end mx-auto lg:w-3/4">
+        {% include "arquivo/components/anchor_button.html" with href=documento.get_edit_url text="Editar" %}
+    </section>
 {% endblock content %}
