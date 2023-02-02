@@ -9,7 +9,7 @@ class Cliente(models.Model):
         JURIDICA = "J", "Pessoa Jurídica"
 
     data_cadastro = models.DateTimeField(null=True, auto_now_add=True)
-    nome = models.CharField(max_length=120, null=True, blank=True)
+    nome = models.CharField(max_length=120, null=True)
     telefone1 = models.CharField(max_length=16, null=True, blank=True)
     telefone_contato = models.CharField(max_length=30, null=True, blank=True)
     cep = models.CharField(max_length=9, null=True, blank=True)
