@@ -11,9 +11,10 @@
         <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
                 <th class="border w-6"></th>
-                <th class="border w-12">Caixa</th>
+                <th class="border w-10">Caixa</th>
+                <th class="border w-10">Cheia</th>
                 <th class="border w-72">Cliente</th>
-                <th class="border w-64">Tipo</th>
+                <th class="border w-56">Tipo</th>
                 <th class="border w-72">Observação</th>
                 <th class="border w-24">Arquivado em</th>
             </tr>
@@ -34,6 +35,7 @@
                     </a>
                 </td>
                 <td class="border p-1">{{ resultado.numero_caixa|floatformat }}</td>
+                <td class="border p-1">{% if resultado.cheia %} Sim {% else %} Não {% endif %}</td>
                 <td class="border p-1">{{ resultado.cliente }}</td>
                 <td class="border p-1">{{ resultado.tipo_de_documento }}</td>
                 <td class="border p-1">{{ resultado.observacao|default:"" }}</td>
