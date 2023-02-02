@@ -292,6 +292,4 @@ cython_debug/
 #.idea/
 
 
-config/
-manage.py
 arquivo/static/arquivo/style.css
