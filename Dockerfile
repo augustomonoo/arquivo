@@ -9,6 +9,7 @@ COPY . ${WORKDIR}
 RUN pip install poetry
 RUN poetry config virtualenvs.in-project true
 RUN poetry install --no-dev
+RUN poetry add gunicorn
 RUN groupadd -g 1000 python
 RUN useradd -u 1000 -g 1000 python
 RUN apt-get update
