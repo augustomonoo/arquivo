@@ -10,7 +10,7 @@ django-widget-tweaks = "^1.4.12"
 python = "^3.10"
 
 [tool.poetry.dev-dependencies]
-Werkzeug = "^2.1.2"
+Werkzeug = "^2.2.2"
 black = "^22.3.0"
 django-debug-toolbar = "^3.4.0"
 django-extensions = "^3.1.5"
