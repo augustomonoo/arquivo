@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y nodejs npm
 RUN npm install
 RUN mkdir -p ${DEPLOYMENT}
-RUN npx tailwindcss -o arquivo/static/arquivo/base.css -o ${DEPLOYMENT}/base.css
+RUN npx tailwindcss -i arquivo/static/arquivo/base.css -o ${DEPLOYMENT}/style.css
 RUN mv ${WORKDIR}/.venv ${DEPLOYMENT}/.venv
 RUN chown -R python:python ${WORKDIR}
 
@@ -35,7 +35,7 @@ COPY ./config ${WORKDIR}/config
 COPY ./manage.py ${WORKDIR}/manage.py
 COPY ./gunicorn.sh ${WORKDIR}/gunicorn.sh
 COPY --from=build ${DEPLOYMENT}/.venv ${WORKDIR}/.venv
-COPY --from=build ${DEPLOYMENT}/base.css ${WORKDIR}/arquivo/static/arquivo/base.css
+COPY --from=build ${DEPLOYMENT}/style.css ${WORKDIR}/arquivo/static/arquivo/style.css
 
 WORKDIR ${WORKDIR}
 
