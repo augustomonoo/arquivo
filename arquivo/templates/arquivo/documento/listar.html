@@ -14,9 +14,11 @@
                 <th class="border w-10">Caixa</th>
                 <th class="border w-10">Cheia</th>
                 <th class="border w-72">Cliente</th>
-                <th class="border w-56">Tipo</th>
+                <th class="border w-44">Tipo</th>
                 <th class="border w-72">Observação</th>
-                <th class="border w-24">Arquivado em</th>
+                <th class="border w-20">Arquivado</th>
+                <th class="border w-14">P. Inicio</th>
+                <th class="border w-14">P. Fim</th>
             </tr>
         </thead>
         {% for resultado in object_list %}
@@ -40,6 +42,8 @@
                 <td class="border p-1">{{ resultado.tipo_de_documento }}</td>
                 <td class="border p-1">{{ resultado.observacao|default:"" }}</td>
                 <td class="border p-1">{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
+                <td class="border p-1">{{ resultado.data_inicio|date:"m/Y" }}</td>
+                <td class="border p-1">{{ resultado.data_finalizacao|date:"m/Y" }}</td>
             </tr>
         {% endfor %}
     </table>
