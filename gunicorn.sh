@@ -1,8 +1,8 @@
 #!/bin/sh
 
-./manage.py migrate && \
-./manage.py initadmin && \
-./manage.py send_queued_messages
+./manage.py migrate
+# ./manage.py initadmin && \
+# ./manage.py send_queued_messages
 
 if [ $? -ne 0 ]
 then
