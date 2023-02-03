@@ -2,6 +2,7 @@ import json
 
 from django.core.management.base import BaseCommand
 from django.core.management.base import CommandError
+from django.db.models import Model
 
 from arquivo.models import Cliente
 from arquivo.models import Documento
@@ -21,10 +22,18 @@ class Command(BaseCommand):
         parser.add_argument("tabela_alvo", nargs="?", type=str)
 
     def _importar(self, klass, table: list[dict[str, str]]) -> None:
-        klass.objects.bulk_create([klass(**c) for c in table])
+        self._criar_objs(klass, [klass(**c) for c in table])
+
+    def _criar_objs(self, klass, objs: list[Model]):
+        klass.objects.bulk_create(objs)
 
     def importar_usuario(self, table: list[dict[str, str]]) -> None:
-        self._importar(User, table)
+        usuarios = [User(**c) for c in table]
+        for u in usuarios:
+            print(u.password, "->", end="")
+            u.set_password(u.password)
+            print(u.password)
+        self._criar_objs(User, usuarios)
 
     def importar_historico(self, table: list[dict[str, str]]) -> None:
         self._importar(Historico, table)
