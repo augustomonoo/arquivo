@@ -47,6 +47,7 @@ RUN apt-get update \
     && mkdir -p ${WORKDIR}/public \
     && mkdir -p ${WORKDIR}/private \
     && chown -R 1000:1000 ${WORKDIR}
+RUN python manage.py collectstatic --noinput
 
 VOLUME [ "${PUBLIC_PATH}", "${PRIVATE_PATH}"]
 
