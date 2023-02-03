@@ -54,4 +54,4 @@ EXPOSE 8000
 USER python
 
 HEALTHCHECK CMD ["curl", "--fail", "http://127.0.0.1:8000"]
-CMD [ "bash", "${WORKDIR}/gunicorn.sh" ]
+CMD [ "bash", "gunicorn.sh" ]
