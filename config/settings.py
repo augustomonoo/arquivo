@@ -65,6 +65,10 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "livereload.middleware.LiveReloadScript",
     ]
+else:
+    MIDDLEWARE += [
+        "whitenoise.middleware.WhiteNoiseMiddleware",
+    ]
 
 
 ROOT_URLCONF = "config.urls"
