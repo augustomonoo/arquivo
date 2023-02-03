@@ -61,8 +61,9 @@ class DocumentoForm(forms.ModelForm):
             "cheia",
         ]
         widgets = {
-            "data_arquivo": forms.DateInput(attrs={"type": "date"}),
+            "data_saida": forms.DateInput(attrs={"type": "date"}),
             "data_inicio": forms.DateInput(attrs={"type": "date"}),
+            "data_finalizacao": forms.DateInput(attrs={"type": "date"}),
         }
 
 
