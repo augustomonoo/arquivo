@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<!--
+ * HTML-Sheets-of-Paper (https://github.com/delight-im/HTML-Sheets-of-Paper)
+ * Copyright (c) delight.im (https://www.delight.im/)
+ * Licensed under the MIT License (https://opensource.org/licenses/MIT)
+-->
+<html>
+    <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 4px;
+    }
+    </style>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Impressão lista de documentos</title>
+    </head>
+    <body class="document">
+        <div id="dados">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Caixa</th>
+                        <th>Cheia</th>
+                        <th>Cliente</th>
+                        <th>Tipo</th>
+                        <th>Observação</th>
+                        <th>Arquivado</th>
+                        <th>P. Inicio</th>
+                        <th>P. Fim</th>
+                    </tr>
+                </thead>
+                {% for resultado in object_list %}
+                    <tr>
+                        <td>{{ resultado.numero_caixa|floatformat }}</td>
+                        <td>{% if resultado.cheia %} Sim {% else %} Não {% endif %}</td>
+                        <td>{{ resultado.cliente }}</td>
+                        <td>{{ resultado.tipo_de_documento }}</td>
+                        <td>{{ resultado.observacao|default:"" }}</td>
+                        <td>{{ resultado.data_arquivo|date:"SHORT_DATE_FORMAT" }}</td>
+                        <td>{{ resultado.data_inicio|date:"m/Y" }}</td>
+                        <td>{{ resultado.data_finalizacao|date:"m/Y" }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
