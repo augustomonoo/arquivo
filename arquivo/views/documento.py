@@ -9,6 +9,7 @@ from arquivo.forms import ConsultaDocumentoForm
 from arquivo.forms import DocumentoForm
 from arquivo.models import Documento
 from arquivo.models import Historico
+from arquivo.views.utils import get_range_objects
 from arquivo.views.utils import paginate
 
 
@@ -75,8 +76,12 @@ def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:
         queryset = Documento.objects.all()
     if form.is_valid():
         queryset = form.search(queryset)
-    if "page" in request.GET:
-        objects_info = paginate(queryset, page_number=request.GET.get("page"))
+    if "start_page" in request.GET:
+        objects_info = get_range_objects(
+            queryset,
+            start_page=request.GET.get("start_page"),
+            end_page=request.GET.get("end_page"),
+        )
     else:
         objects_info = {"object_list": queryset}
     contexto = {
