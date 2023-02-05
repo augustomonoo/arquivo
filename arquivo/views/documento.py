@@ -75,9 +75,13 @@ def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:
         queryset = Documento.objects.all()
     if form.is_valid():
         queryset = form.search(queryset)
+    if "page" in request.GET:
+        objects_info = paginate(queryset, page_number=request.GET.get("page"))
+    else:
+        objects_info = {"object_list": queryset}
     contexto = {
         "form": form,
         "queryset": queryset,
-        **paginate(queryset, page_number=request.GET.get("page")),
+        **objects_info,
     }
     return render(request, "arquivo/documento/imprimir_lista.html", contexto)
