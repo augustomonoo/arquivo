@@ -22,18 +22,12 @@ def get_range_objects(
     object_per_page: int = __PAGINATOR_DEFAULT_SIZE__,
     start_page: int = 1,
     end_page: int = None,
-):  # sourcery skip: remove-unnecessary-cast
-    try:
-        start_page = int(start_page)
-    except ValueError:
-        start_page = 0
-    try:
-        end_page = int(end_page)
-    except ValueError:
-        end_page = 0
-
-    start = start_page * object_per_page
-    if end_page:
+):
+    """[start_page, end_page)
+    indice inicial em 1
+    """
+    start = (start_page - 1) * object_per_page
+    if end_page and end_page >= start_page:
         end = end_page * object_per_page
         return {"object_list": queryset[start:end]}
     return {"object_list": queryset[start:]}
