@@ -38,6 +38,15 @@ class ConsultaDocumentoForm(ConsultaBaseForm):
     ]
 
 
+class ImpressaoListaDocumentoForm(forms.Form):
+    start_page = forms.IntegerField(label="Pagina inicial", min_value=1)
+    end_page = forms.IntegerField(label="Pagina final", required=False)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["end_page"].initial = 0
+
+
 class ConsultaClienteForm(ConsultaBaseForm):
     campos_de_pesquisa = [
         ("razao_social", "icontains"),
