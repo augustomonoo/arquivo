@@ -7,6 +7,7 @@ from django.shortcuts import render
 
 from arquivo.forms import ConsultaDocumentoForm
 from arquivo.forms import DocumentoForm
+from arquivo.forms import ImpressaoListaDocumentoForm
 from arquivo.models import Documento
 from arquivo.models import Historico
 from arquivo.views.utils import get_range_objects
@@ -70,17 +71,18 @@ def listar(request, cliente_id: int = None) -> HttpResponse:
 @login_required
 def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
+    print_form = ImpressaoListaDocumentoForm(request.GET or None)
     if cliente_id:
         queryset = Documento.objects.filter(cliente_id=cliente_id)
     else:
         queryset = Documento.objects.all()
     if form.is_valid():
         queryset = form.search(queryset)
-    if "start_page" in request.GET:
+    if print_form.is_valid():
         objects_info = get_range_objects(
             queryset,
-            start_page=request.GET.get("start_page"),
-            end_page=request.GET.get("end_page"),
+            start_page=print_form.cleaned_data["start_page"],
+            end_page=print_form.cleaned_data["end_page"],
         )
     else:
         objects_info = {"object_list": queryset}
