@@ -294,3 +294,4 @@ cython_debug/
 
 arquivo/static/arquivo/style.css
 arquivo/static/arquivo/bundle.js
+static/
