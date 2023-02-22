@@ -1,7 +1,8 @@
-FROM python:3.10 as build
+FROM python:3.10 as build-python
 
 ENV WORKDIR "/app"
 ENV DEPLOYMENT "${WORKDIR}/deployment"
+ENV DEBIAN_FRONTEND=noninteractive 
 
 WORKDIR ${WORKDIR}
 COPY . ${WORKDIR}
@@ -12,9 +13,19 @@ RUN poetry install --no-dev
 RUN groupadd -g 1000 python
 RUN useradd -u 1000 -g 1000 python
 RUN mkdir -p ${DEPLOYMENT}
-RUN npx tailwindcss -i arquivo/static/arquivo/base.css -o ${DEPLOYMENT}/style.css
 RUN mv ${WORKDIR}/.venv ${DEPLOYMENT}/.venv
 RUN chown -R python:python ${WORKDIR}
+
+FROM node:18.14.1 as build-node
+ENV WORKDIR "/app"
+ENV DEPLOYMENT "${WORKDIR}/deployment"
+
+WORKDIR ${WORKDIR}
+COPY . ${WORKDIR}
+
+RUN mkdir -p ${DEPLOYMENT}
+RUN npm install
+RUN npm run build:docker
 
 FROM python:3.10
 LABEL maintainer="Carlos Augusto Monoo Pereira Barbosa <augustomonoo@gmail.com>"
@@ -30,8 +41,9 @@ COPY ./arquivo ${WORKDIR}/arquivo
 COPY ./config ${WORKDIR}/config
 COPY ./manage.py ${WORKDIR}/manage.py
 COPY ./gunicorn.sh ${WORKDIR}/gunicorn.sh
-COPY --from=build ${DEPLOYMENT}/.venv ${WORKDIR}/.venv
-COPY --from=build ${DEPLOYMENT}/style.css ${WORKDIR}/arquivo/static/arquivo/style.css
+COPY --from=build-python ${DEPLOYMENT}/.venv ${WORKDIR}/.venv
+COPY --from=build-node ${DEPLOYMENT}/style.css ${WORKDIR}/arquivo/static/arquivo/style.css
+COPY --from=build-node ${DEPLOYMENT}/bundle.js ${WORKDIR}/arquivo/static/arquivo/bundle.js
 
 WORKDIR ${WORKDIR}
 
@@ -43,7 +55,7 @@ RUN apt-get update \
     && mkdir -p ${WORKDIR}/public \
     && mkdir -p ${WORKDIR}/private \
     && chown -R 1000:1000 ${WORKDIR}
-RUN python manage.py collectstatic --noinput
+RUN DEBUG=False python manage.py collectstatic --noinput
 
 VOLUME [ "${PUBLIC_PATH}", "${PRIVATE_PATH}"]
 
