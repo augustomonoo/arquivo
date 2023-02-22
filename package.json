@@ -4,17 +4,31 @@
   "description": "",
   "main": "postcss.config.js",
   "scripts": {
-    "build": "postcss arquivo/static/arquivo/base.css -o arquivo/static/arquivo/style.css"
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "npm run js:clean; npm run js:compile",
+    "build:js:watch": "onchange -i 'arquivo/frontend_src/*.ts' -- npm run build:js",
+    "build:css": "npm run css:clean; npm run css:compile",
+    "build:css:watch": "onchange -i 'arquivo/frontend_src/*.css' -- npm run build:css",
+    "js:clean": "rm arquivo/static/arquivo/*.js",
+    "js:compile": "rollup --config",
+    "css:clean": "rm arquivo/static/arquivo/*.css",
+    "css:compile": "postcss 'arquivo/frontend_src/main.css' -o 'arquivo/static/arquivo/style.css'"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^10.4.7",
+    "htmx.org": "^1.8.5",
     "postcss-cli": "^10.1.0",
     "tailwindcss": "^3.1.4"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.2"
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@tailwindcss/forms": "^0.5.2",
+    "onchange": "^7.1.0",
+    "rollup": "^3.17.2",
+    "tslib": "^2.5.0",
+    "typescript": "^4.9.5"
   }
 }
