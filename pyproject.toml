@@ -5,7 +5,7 @@ name = "arquivo"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-Django = "^4.0.5"
+Django = "^4.1.7"
 django-widget-tweaks = "^1.4.12"
 python = "^3.10"
 python-dotenv = "^0.21.1"
