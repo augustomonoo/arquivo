@@ -1,5 +1,7 @@
 from django.db import models
 from django.urls import reverse_lazy
+from django.utils import timezone
+
 from typing import Any
 
 
@@ -24,7 +26,7 @@ class Documento(models.Model):
     )
     observacao = models.CharField(max_length=230, null=True, blank=True)
     cheia = models.BooleanField(default=False)
-    data_arquivo = models.DateTimeField(null=True, blank=True, auto_now_add=True)
+    data_arquivo = models.DateTimeField(null=True, blank=True, default=timezone.now)
     data_inicio = models.DateTimeField(null=True, blank=True)
 
     class Meta:
