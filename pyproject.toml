@@ -19,6 +19,7 @@ django-debug-toolbar = "^4.4.6"
 django-extensions = "^3.2.3"
 django-livereload-server = "^0.5.1"
 djlint = "^1.34.1"
+django-stubs = "^5.0.2"
 
 [tool.djlint]
 blank_line_after_tag = "load,extends"
@@ -28,3 +29,9 @@ profile = "django"
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugins.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
