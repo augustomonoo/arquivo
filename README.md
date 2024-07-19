@@ -82,14 +82,20 @@ O livereload oferece a comodidade de automaticamente recarregar as páginas no n
 poetry run python manage.py livereload
 ```
 
-### Processador CSS para tailwindcss
+### Compilar CSS e JS
 
 O CSS do app precisa ser gerado utilizando o tailwindcss.
 
 ```bash
-npx tailwindcss -i arquivo/static/arquivo/base.css -o arquivo/static/arquivo/style.css --watch
+npm run build:css
+npm run build:js
 ```
 
+Também pode usar watch para monitorar mudanças e recompilar os arquivos automaticamente
+```bash
+npm run build:css:watch
+npm run build:js:watch
+```
 
 ### Configurando o login do sistema
 1 - Incluir no config/settings.py:
