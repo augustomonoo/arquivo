@@ -1,11 +1,10 @@
 from abc import abstractmethod
-from arquivo.models import Cliente
-from arquivo.models import Documento
 from dataclasses import field
-from django import forms
-from django.db.models import Q
-from django.db.models import QuerySet
 
+from django import forms
+from django.db.models import Q, QuerySet
+
+from arquivo.models import Cliente, Documento
 from arquivo.models.tipo_de_documento import TipoDeDocumento
 
 
@@ -23,6 +22,8 @@ class ConsultaBaseForm(forms.Form):
         q = Q()
         for termo in s:
             for campo, operador in self.campos_de_pesquisa:
+                if operador == "exact" and not termo.isdigit():
+                    continue
                 q = q | Q(**{f"{campo}__{operador}": termo})
         return queryset.filter(q)
 
@@ -35,7 +36,8 @@ class ConsultaDocumentoForm(ConsultaBaseForm):
     campos_de_pesquisa = [
         ("observacao", "icontains"),
         ("cliente__razao_social", "icontains"),
-        ("numero_caixa", "contains"),
+        ("cliente__nome", "icontains"),
+        ("numero_caixa", "exact"),
         ("tipo_de_documento__descricao", "icontains"),
     ]
 
@@ -82,6 +84,7 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         exclude = ["data_cadastro"]
+
 
 class TipoDeDocumentoForm(forms.ModelForm):
     class Meta:
