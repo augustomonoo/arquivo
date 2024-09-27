@@ -1,13 +1,10 @@
-from django.urls import include
-from django.urls import path
+from django.urls import include, path
 
-from arquivo.views import cliente
-from arquivo.views import documento
-from arquivo.views import main
-from arquivo.views import caixa
+from arquivo.views import caixa, cliente, documento, main
 
 caixa_patterns = [
-    path("", caixa.caixa_lista),
+    path("", caixa.caixa_lista, name="caixa_lista"),
+    path("<int:numero>", caixa.caixa_detalhe, name="caixa_detalhe"),
 ]
 
 cliente_patterns = [
