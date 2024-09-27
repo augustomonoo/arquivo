@@ -1,8 +1,10 @@
 from dataclasses import dataclass, field
 
 from django.http import HttpRequest, HttpResponse
+from django.http.response import Http404
 from django.shortcuts import get_list_or_404, render
 
+from arquivo.forms import ConsultaDocumentoForm
 from arquivo.models.documento import Documento
 
 
@@ -26,8 +28,14 @@ def caixa_lista(request: HttpRequest) -> HttpResponse:
 
 
 def caixa_detalhe(request: HttpRequest, numero: int) -> HttpResponse:
-    documentos = get_list_or_404(Documento, numero_caixa=numero)
+    documentos = Documento.objects.filter(numero_caixa=numero)
+    if documentos.count() == 0:
+        raise Http404
+    form = ConsultaDocumentoForm(request.GET or None)
+    if form.is_valid():
+        documentos = form.search(documentos)
     contexto = {
         "object_list": documentos,
+        "form": form,
     }
     return render(request, "arquivo/documento/listar.html", contexto)
