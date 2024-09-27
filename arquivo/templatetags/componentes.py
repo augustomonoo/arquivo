@@ -18,7 +18,7 @@ def menu() -> dict:
             "Clientes",
             {"href": Cliente.get_listar_url(), "text": "Consultar clientes"},
             {"href": Cliente.get_criar_url(), "text": "Novo Cliente"},
-            "Conta",
+            "Conta",  # TODO: trocar o link de logout para um formulario de logout
             {"href": reverse_lazy("logout"), "text": "Sair"},
         ),
     }
