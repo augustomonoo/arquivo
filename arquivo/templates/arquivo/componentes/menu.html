@@ -1,5 +1,5 @@
 <nav class="p-2 bg-gray-400 dark:bg-gray-600 w-64 flex flex-col h-screen fixed top-0 left-0">
-   {% comment %} nav_links são injetados no contexto via context_processor {% endcomment %}
+   {% comment %} nav_links são injetados no contexto pela funcao componentes.menu {% endcomment %}
    {% for nav_link in nav_links %}
    {% if nav_link.href %}
    <a href="{{ nav_link.href }}"
