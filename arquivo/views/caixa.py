@@ -15,7 +15,7 @@ class Caixa:
 
 def caixa_lista(request: HttpRequest) -> HttpResponse:
     caixas = [
-        Caixa(numero=n, cheia=c)
+        Caixa(numero=int(n), cheia=c)
         for n, c in Documento.objects.values_list("numero_caixa", "cheia").distinct()
     ]
     contexto = {
