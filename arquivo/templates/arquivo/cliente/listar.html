@@ -2,10 +2,10 @@
 
 {% block content %}
     <form action="." class="flex items-center gap-2 justify-around mx-auto my-2">
-        {% include "arquivo/components/form.html" with labels=False %}
-        {% include "arquivo/components/button.html" with type="submit" text="Pesquisar" %}
+        {% include "arquivo/componentes/form.html" with labels=False %}
+        {% include "arquivo/componentes/button.html" with type="submit" text="Pesquisar" %}
     </form>
-    {% include "arquivo/components/pagination.html" %}
+    {% include "arquivo/componentes/pagination.html" %}
     <table class="border-collapse border border-slate-400 dark:border-slate-500 bg-white dark:bg-slate-800 text-xs shadow-sm overflow-x-auto table-fixed w-full resize-none">
         <thead class="bg-slate-50 dark:bg-slate-700">
             <tr>
