@@ -1,4 +1,5 @@
 {% load static %}
+{% load componentes %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,19 +14,7 @@
         <title>Arquivo</title>
     </head>
     <body class="bg-gray-200 dark:bg-gray-800 dark:text-white flex flex-row flex-nowrap">
-        <nav class="p-2 bg-gray-400 dark:bg-gray-600 w-64 flex flex-col h-screen fixed top-0 left-0">
-            {% comment %} nav_links são injetados no contexto via context_processor {% endcomment %}
-            {% for nav_link in nav_links %}
-                {% if nav_link.href %}
-                    <a href="{{ nav_link.href }}"
-                       class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">{{ nav_link.text }}</a>
-                {% else %}
-                    <p class="border-b-2 border-dashed mb-2 border-b-slate-700 dark:border-b-slate-400 text-black dark:text-white font-bold">
-                        {{ nav_link }}
-                    </p>
-                {% endif %}
-            {% endfor %}
-        </nav>
+        {% menu %}
         <section class="w-full px-2 ml-64">
             {% block content %}
             {% endblock content %}
