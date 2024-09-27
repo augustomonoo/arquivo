@@ -25,6 +25,7 @@ documento_patterns = [
     path("novo/", documento.novo, name="documento_novo"),
     path("<int:id>/", documento.detalhe, name="documento_detalhe"),
     path("<int:id>/editar/", documento.novo, name="documento_editar"),
+    path("novo_tipo/", documento.tipo_documento_novo, name="tipo_de_documento_novo"),
 ]
 
 main_patterns = [

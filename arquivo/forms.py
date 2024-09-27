@@ -6,6 +6,8 @@ from django import forms
 from django.db.models import Q
 from django.db.models import QuerySet
 
+from arquivo.models.tipo_de_documento import TipoDeDocumento
+
 
 class ConsultaBaseForm(forms.Form):
     s = forms.CharField(max_length=255, required=False)
@@ -80,3 +82,8 @@ class ClienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         exclude = ["data_cadastro"]
+
+class TipoDeDocumentoForm(forms.ModelForm):
+    class Meta:
+        model = TipoDeDocumento
+        fields = "__all__"

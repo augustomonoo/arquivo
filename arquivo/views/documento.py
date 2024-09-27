@@ -1,11 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponse
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from arquivo.forms import ConsultaDocumentoForm
+from arquivo.forms import ConsultaDocumentoForm, TipoDeDocumentoForm
 from arquivo.forms import DocumentoForm
 from arquivo.forms import ImpressaoListaDocumentoForm
 from arquivo.models import Documento
@@ -92,3 +92,14 @@ def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:
         **objects_info,
     }
     return render(request, "arquivo/documento/imprimir_lista.html", contexto)
+
+
+@login_required
+def tipo_documento_novo(request: HttpRequest) -> HttpResponse:
+    form = TipoDeDocumentoForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+    contexto = {
+        "form": form
+    }
+    return render(request, "arquivo/documento/tipo_de_documento_novo.html", contexto)
