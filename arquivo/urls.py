@@ -4,7 +4,11 @@ from django.urls import path
 from arquivo.views import cliente
 from arquivo.views import documento
 from arquivo.views import main
+from arquivo.views import caixa
 
+caixa_patterns = [
+    path("", caixa.caixa_lista),
+]
 
 cliente_patterns = [
     path("", cliente.cliente_listar, name="cliente_listar"),
@@ -36,4 +40,5 @@ urlpatterns = [
     path("", include(main_patterns)),
     path("documento/", include(documento_patterns)),
     path("cliente/", include(cliente_patterns)),
+    path("caixa/", include(caixa_patterns)),
 ]
