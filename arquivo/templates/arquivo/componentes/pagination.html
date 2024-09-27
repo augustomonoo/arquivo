@@ -22,7 +22,7 @@
     </a>
     <p>
         Página
-        <form action="." method="get" class="inline">
+        <form method="get" class="inline">
             {% for arg_name, arg_val in paginator_get.items %}
                 <input type="hidden" name="{{ arg_name }}" value="{{ arg_val }}" />
             {% endfor %}
