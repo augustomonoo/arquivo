@@ -6,6 +6,8 @@
       class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">
       {{ nav_link.text }}
    </a>
+   {% elif nav_link.is_form %}
+      {% include nav_link.action with text=nav_link.text %}
    {% else %}
    <p
       class="border-b-2 border-dashed mb-2 border-b-slate-700 dark:border-b-slate-400 text-black dark:text-white font-bold">
