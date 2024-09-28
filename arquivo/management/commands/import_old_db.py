@@ -62,6 +62,7 @@ class Command(BaseCommand):
             tabela_tipo_doc = old_database["CAD_DESCRICAO.sql"]
             tabela_documentos = old_database["LAN_LANCAMENTO.sql"]
 
+        # Options para importar tabela individual. Se omisso importa tudo
         match options.get("tabela_alvo", None):
             case "usuarios":
                 self.importar_usuario(tabela_usuarios)
