@@ -1,4 +1,4 @@
-<form method="post" action="{% url 'logout' %}">
+<form method="post" class="w-full flex" action="{% url 'logout' %}">
+    <button class="w-full ml-4 mb-1 p-1 pl-2 bg-slate-700 hover:bg-slate-500 text-white text-left font-bold rounded-br-full rounded-tr-full" type="submit">{{ text }}</button>
     {% csrf_token %}
-    <button type="submit">logout</button>
 </form>
