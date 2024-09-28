@@ -1,4 +1,1 @@
-<form method="post" class="w-full flex" action="{% url 'logout' %}">
-    <button class="w-full ml-4 mb-1 p-1 pl-2 bg-slate-700 hover:bg-slate-500 text-white text-left font-bold rounded-br-full rounded-tr-full" type="submit">{{ text }}</button>
-    {% csrf_token %}
-</form>
+<a class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white text-left font-bold rounded-br-full rounded-tr-full hover:cursor-pointer" hx-post="{% url 'logout' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="body">{{ text}}</a>
