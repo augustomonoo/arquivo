@@ -12,6 +12,9 @@ class NavLink(NamedTuple):
     text: str
     href: Optional[str] = None
 
+    def is_link(self) -> bool:
+        return self.href is not None
+
 
 @register.inclusion_tag("arquivo/componentes/menu.html")
 def menu() -> dict[str, list[NavLink]]:

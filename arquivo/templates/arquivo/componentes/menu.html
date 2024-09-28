@@ -1,7 +1,7 @@
 <nav class="p-2 bg-gray-400 dark:bg-gray-600 w-64 flex flex-col h-screen fixed top-0 left-0">
    {% comment %} nav_links são injetados no contexto pela funcao componentes.menu {% endcomment %}
    {% for nav_link in nav_links %}
-   {% if nav_link.href %}
+   {% if nav_link.is_link %}
    <a href="{{ nav_link.href }}"
       class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">
       {{ nav_link.text }}
