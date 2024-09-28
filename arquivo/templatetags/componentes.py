@@ -8,19 +8,33 @@ from arquivo.models import Documento, Cliente
 register = template.Library()
 
 
+class ComponenteRef(str):
+    pass
+
 class HRef(str):
     pass
 
 
 class NavLink(NamedTuple):
     text: str
-    action: Optional[HRef] = None
+    action: Optional[HRef | ComponenteRef] = None
 
     def href(self) -> Optional[HRef]:
         return self.action
 
+    def is_form(self) -> bool:
+        match self.action:
+            case ComponenteRef(_):
+                return True
+            case _:
+                return False
+
     def is_link(self) -> bool:
-        return self.action is not None
+        match self.action:
+            case HRef(_):
+                return True
+            case _:
+                return False
 
 
 @register.inclusion_tag("arquivo/componentes/menu.html")
@@ -38,6 +52,6 @@ def menu() -> dict[str, list[NavLink]]:
             NavLink(text="Consultar Clientes", action=HRef(Cliente.get_listar_url())),
             NavLink(text="Novo Cliente", action=HRef(Cliente.get_criar_url())),
             NavLink(text="Conta"),  # TODO: trocar o link de logout para um formulario de logout
-            NavLink(text="Sair", action=HRef(reverse_lazy("logout"))),
+            NavLink(text="Sair", action=ComponenteRef("arquivo/componentes/form_logout.html")),
         ],
     }
