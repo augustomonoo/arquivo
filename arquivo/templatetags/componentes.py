@@ -51,7 +51,7 @@ def menu() -> dict[str, list[NavLink]]:
             NavLink(text="Clientes"),
             NavLink(text="Consultar Clientes", action=HRef(Cliente.get_listar_url())),
             NavLink(text="Novo Cliente", action=HRef(Cliente.get_criar_url())),
-            NavLink(text="Conta"),  # TODO: trocar o link de logout para um formulario de logout
+            NavLink(text="Conta"),
             NavLink(text="Sair", action=ComponenteRef("arquivo/componentes/form_logout.html")),
         ],
     }
