@@ -14,7 +14,7 @@ whitenoise = "^6.7.0"
 
 [tool.poetry.group.dev.dependencies]
 Werkzeug = "^3.0.3"
-black = "^24.4.2"
+black = "^24.10.0"
 django-debug-toolbar = "^4.4.6"
 django-extensions = "^3.2.3"
 django-livereload-server = "^0.5.1"
