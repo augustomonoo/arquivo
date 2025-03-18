@@ -1,4 +1,4 @@
-FROM python:3.10 as build-python
+FROM python:3.12 as build-python
 
 ENV WORKDIR "/app"
 ENV DEPLOYMENT "${WORKDIR}/deployment"
@@ -9,7 +9,7 @@ COPY . ${WORKDIR}
 
 RUN pip install poetry
 RUN poetry config virtualenvs.in-project true
-RUN poetry install --no-dev
+RUN poetry install --without=dev
 RUN groupadd -g 1000 python
 RUN useradd -u 1000 -g 1000 python
 RUN mkdir -p ${DEPLOYMENT}
@@ -27,7 +27,7 @@ RUN mkdir -p ${DEPLOYMENT}
 RUN npm install
 RUN npm run build:docker
 
-FROM python:3.10
+FROM python:3.12
 LABEL maintainer="Carlos Augusto Monoo Pereira Barbosa <augustomonoo@gmail.com>"
 
 ENV WORKDIR "/app"
