@@ -2,12 +2,26 @@
 
 {% for hidden_field in form.hidden_fields %}{{ hidden_field }}{% endfor %}
 {% for field in form.visible_fields %}
-    <div class="flex flex-col w-full">
-        {% if labels %}<label for="{{ field.id_for_label }}">{{ field.label }}</label>{% endif %}
-        {% if placeholder %}
-            {% render_field field class+="form-input rounded dark:text-black" placeholder=field.label %}
-        {% else %}
-            {% render_field field class+="form-input rounded dark:text-black" %}
-        {% endif %}
-    </div>
+    {% if field.is_hidden %}
+        {{ field }}
+    {% else %}
+        <div class="flex flex-col w-full">
+            {% if labels %}
+                <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    {{ field.label|title }}
+                </label>
+            {% endif %}
+            {% if placeholder %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+            {% else %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+            {% endif %}
+            {% if field.help_text %}
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ field.help_text }}</p>
+            {% endif %}
+            {% if field.errors %}
+                <p class="mt-1 text-sm text-red-600 dark:text-red-400">{{ field.errors.0 }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
 {% endfor %}
