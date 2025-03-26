@@ -1,22 +1,67 @@
-<h1 class="text-lg font-bold my-2">{{ cliente }}</h1>
-<h2 class="font-bold border-dashed border-b-2 my-1">Dados cadastrais</h2>
-<p>{{ cliente.get_tipo_pessoa_display }}</p>
-<p>CNPJ/CPF: {{ cliente.cnpj|default:"Não informado" }}</p>
-<p>Inscrição Estadual: {{ cliente.inscricao_estadual|default:"Não informado" }}</p>
-{% if cliente.atividade %}<p class="italic">Atividade: {{ cliente.atividade }}</p>{% endif %}
-<h2 class="font-bold border-dashed border-b-2 my-1 ">Contato</h2>
-<ul>
-    <li>Telefone 1: {{ cliente.telefone1|default:"---" }}</li>
-    <li>Telefone 2: {{ cliente.telefone_contato|default:"---" }}</li>
-</ul>
-<h2 class="font-bold border-dashed border-b-2 my-1 ">Endereço</h2>
-<p>
-    Logradouro: {{ cliente.endereco|default:"---" }}
-    <br>
-    Bairro: {{ cliente.bairro|default:"---" }}
-    <br>
-    Cidade: {{ cliente.cidade|default:"---" }}
-    <br>
-    Estado: {{ cliente.sigla_estado|default:"---" }}
-    <br>
-</p>
+<div class="p-6">
+    <div class="mb-6">
+        <h2 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ cliente }}</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">{{ cliente.get_tipo_pessoa_display }}</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Dados Cadastrais -->
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Dados Cadastrais</h3>
+            <dl class="space-y-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">CNPJ/CPF</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.cnpj|default:"Não informado" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Inscrição Estadual</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.inscricao_estadual|default:"Não informado" }}</dd>
+                </div>
+                {% if cliente.atividade %}
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Atividade</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white italic">{{ cliente.atividade }}</dd>
+                </div>
+                {% endif %}
+            </dl>
+        </div>
+
+        <!-- Contato -->
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Contato</h3>
+            <dl class="space-y-2">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Telefone Principal</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.telefone1|default:"---" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Telefone Secundário</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.telefone_contato|default:"---" }}</dd>
+                </div>
+            </dl>
+        </div>
+
+        <!-- Endereço -->
+        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 md:col-span-2">
+            <h3 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Endereço</h3>
+            <dl class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Logradouro</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.endereco|default:"---" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Bairro</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.bairro|default:"---" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Cidade</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.cidade|default:"---" }}</dd>
+                </div>
+                <div>
+                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Estado</dt>
+                    <dd class="text-sm text-gray-900 dark:text-white">{{ cliente.sigla_estado|default:"---" }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -11,10 +11,14 @@
                     {{ field.label|title }}
                 </label>
             {% endif %}
-            {% if placeholder %}
-                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+            {% if field.name == 's' %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder="Pesquisar..." %}
             {% else %}
-                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+                {% if placeholder %}
+                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+                {% else %}
+                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+                {% endif %}
             {% endif %}
             {% if field.help_text %}
                 <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ field.help_text }}</p>

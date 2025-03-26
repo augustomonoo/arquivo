@@ -1,15 +1,36 @@
 {% extends 'arquivo/base.html' %}
 
 {% block content %}
-    <section id="cliente-detalhe" class="my-2 mx-auto lg:w-3/4" hx-get="{% url 'cliente_detalhe_partial' cliente.pk %}"
-             hx-trigger="load">
-    </section>
-    <section id="acoes" class="my-2 flex gap-2 justify-end mx-auto lg:w-3/4">
-        {% include "arquivo/componentes/anchor_button.html" with href=cliente.get_edit_url text="Editar" bg_color="bg-red-400" %}
-        {% include "arquivo/componentes/anchor_button.html" with href=cliente.get_document_list_url text="Consultar Documentos" %}
-        {% include "arquivo/componentes/anchor_button.html" with href=cliente.get_document_create_url text="Novo Documento" bg_color="bg-green-400" %}
-    </section>
-    <section id="cliente-documentos" class="my-2 mx-auto lg:w-3/4" hx-get="{% url 'cliente_documentos_partial' cliente.pk %}{% querystring %}"
-             hx-trigger="load">
-    </section>
+    <div class="space-y-6">
+        <!-- Header Section -->
+        <div class="flex items-center justify-between">
+            <h1 class="text-2xl font-semibold text-gray-900 dark:text-white">Detalhes do Cliente</h1>
+            <div class="flex gap-2">
+                <a href="{{ cliente.get_edit_url }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                    </svg>
+                    Editar
+                </a>
+                <a href="{{ cliente.get_document_create_url }}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 dark:focus:ring-offset-gray-800">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                    </svg>
+                    Novo Documento
+                </a>
+            </div>
+        </div>
+
+        <!-- Client Details Section -->
+        <section id="cliente-detalhe" class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden" 
+                 hx-get="{% url 'cliente_detalhe_partial' cliente.pk %}"
+                 hx-trigger="load">
+        </section>
+
+        <!-- Documents Section -->
+        <section id="cliente-documentos" class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden"
+                 hx-get="{% url 'cliente_documentos_partial' cliente.pk %}{% querystring %}"
+                 hx-trigger="load">
+        </section>
+    </div>
 {% endblock content %}
