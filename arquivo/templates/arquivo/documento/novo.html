@@ -1,9 +1,90 @@
 {% extends "arquivo/base.html" %}
 
 {% block content %}
-    <form action="." method="post">
-        {% csrf_token %}
-        {% include "arquivo/componentes/form.html" with labels=True %}
-        {% include "arquivo/componentes/button.html" with type="submit" text="Salvar" %}
-    </form>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-white dark:bg-gray-800 shadow rounded-lg overflow-hidden">
+            <div class="px-4 py-5 sm:px-6 border-b border-gray-200 dark:border-gray-700">
+                <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+                    {% if form.instance.pk %}Editar Documento{% else %}Novo Documento{% endif %}
+                </h1>
+            </div>
+            <form action="." method="post" class="divide-y divide-gray-200 dark:divide-gray-700">
+                {% csrf_token %}
+                <!-- Informações Básicas -->
+                <div class="px-4 py-5 sm:p-6">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Informações Básicas</h2>
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            {% with form.tipo_de_documento as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                        <div>
+                            {% with form.numero_caixa as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                        <div class="sm:col-span-2">
+                            {% with form.observacao as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Datas -->
+                <div class="px-4 py-5 sm:p-6">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Datas</h2>
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            {% with form.data_inicio as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                        <div>
+                            {% with form.data_finalizacao as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                        <div>
+                            {% with form.data_saida as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                        <div>
+                            {% with form.data_arquivo as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status -->
+                <div class="px-4 py-5 sm:p-6">
+                    <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Status</h2>
+                    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                        <div>
+                            {% with form.cheia as field %}
+                                {% include "arquivo/componentes/form_field.html" with labels=True %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="px-4 py-5 sm:p-6 bg-gray-50 dark:bg-gray-700">
+                    <div class="flex justify-end space-x-3">
+                        <a href="{{ form.instance.cliente.get_document_list_url }}" 
+                           class="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Cancelar
+                        </a>
+                        <button type="submit" 
+                                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Salvar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock content %}

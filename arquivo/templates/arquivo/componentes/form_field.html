@@ -9,10 +9,18 @@
                 {{ field.label|title }}
             </label>
         {% endif %}
-        {% if placeholder %}
-            {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+        {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-gray-200 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:bg-gray-700">
+                <span class="sr-only">{{ field.label }}</span>
+                <span class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out translate-x-0 {% if field.value %}translate-x-5{% endif %}"></span>
+                {% render_field field class="sr-only" %}
+            </div>
         {% else %}
-            {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+            {% if placeholder %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+            {% else %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+            {% endif %}
         {% endif %}
         {% if field.help_text %}
             <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ field.help_text }}</p>

@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run build:js && npm run build:css",
     "build:js": "npm run js:clean && npm run js:compile",
-    "build:js:watch": "onchange -i arquivo/frontend_src/*.ts -- npm run build:js",
+    "build:js:watch": "onchange -i \"arquivo/frontend_src/**/*.ts\" -- npm run build:js",
     "build:css": "npm run css:clean && npm run css:compile",
     "build:css:watch": "onchange -i arquivo/**/*/.css -i arquivo/**/*.html -i arquivo/**/*.py -- npm run build:css",
     "build:docker": "npm run build && mkdir -p deployment && cp arquivo/static/arquivo/bundle.js deployment/ && cp arquivo/static/arquivo/style.css deployment/",
