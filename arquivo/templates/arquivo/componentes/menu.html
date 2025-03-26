@@ -1,18 +1,31 @@
-<nav class="p-2 bg-gray-400 dark:bg-gray-600 w-64 flex flex-col h-screen fixed top-0 left-0">
+<nav class="p-4 bg-white dark:bg-gray-800 w-64 flex flex-col h-screen fixed top-0 left-0 border-r border-gray-200 dark:border-gray-700 shadow-lg">
    {% comment %} nav_links são injetados no contexto pela funcao componentes.menu {% endcomment %}
-   {% for nav_link in nav_links %}
-   {% if nav_link.is_link %}
-   <a href="{{ nav_link.href }}"
-      class="ml-4 p-1 pl-2 mb-1 bg-slate-700 hover:bg-slate-500 text-white font-bold rounded-br-full rounded-tr-full">
-      {{ nav_link.text }}
-   </a>
-   {% elif nav_link.is_form %}
-      {% include nav_link.action with text=nav_link.text %}
-   {% else %}
-   <p
-      class="border-b-2 border-dashed mb-2 border-b-slate-700 dark:border-b-slate-400 text-black dark:text-white font-bold">
-      {{ nav_link.text }}
-   </p>
-   {% endif %}
-   {% endfor %}
+   <div class="mb-8">
+      <h1 class="text-xl font-bold text-gray-900 dark:text-white">Arquivo</h1>
+   </div>
+   <div class="space-y-6">
+      {% for nav_link in nav_links %}
+      {% if nav_link.is_link %}
+      <a href="{{ nav_link.href }}"
+         class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-150">
+         {{ nav_link.text }}
+      </a>
+      {% elif nav_link.is_form %}
+         {% include nav_link.action with text=nav_link.text %}
+      {% else %}
+      <div class="space-y-2">
+         <div class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+            {{ nav_link.text }}
+         </div>
+         <div class="border-t border-gray-200 dark:border-gray-700"></div>
+      </div>
+      {% endif %}
+      {% endfor %}
+      <a class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-150 cursor-pointer"
+         hx-post="{% url 'logout' %}" 
+         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
+         hx-target="body">
+         Sair
+      </a>
+   </div>
 </nav>

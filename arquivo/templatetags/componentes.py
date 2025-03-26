@@ -42,14 +42,9 @@ def menu() -> dict[str, list[NavLink]]:
     return {
         "nav_links": [
             NavLink(text="Início", action=HRef(reverse_lazy("main_index"))),
-            NavLink(text="Documentos"),
-            # "Arquivos",
-            # {"href": Arquivo.get_criar_url(), "text": "Novo Arquivo"},
-            # {"href": Arquivo.get_listar_url(), "text": "Consultar arquivos"},
             NavLink(text="Clientes"),
             NavLink(text="Consultar Clientes", action=HRef(Cliente.get_listar_url())),
             NavLink(text="Novo Cliente", action=HRef(Cliente.get_criar_url())),
             NavLink(text="Conta"),
-            NavLink(text="Sair", action=ComponenteRef("arquivo/componentes/form_logout.html")),
         ],
     }

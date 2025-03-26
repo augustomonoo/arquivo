@@ -1,8 +1,74 @@
 {% load widget_tweaks %}
 
-{% for field, value in fields.items %}
-    <p id="field-{{ field }}">
-        <div id="field-{{ field }}-name" class="inline font-bold">{{ field|title }}:</div>
-        <div id="field-{{ field }}-value" class="inline">{{ value|default:"---" }}</div>
-    </p>
-{% endfor %}
+<div class="p-6 space-y-8">
+    <!-- Basic Information -->
+    <div>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Informações Básicas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Tipo de Documento</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.tipo_de_documento }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Cliente</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.cliente }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Número da Caixa</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.numero_caixa|default:"---" }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Observação</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.observacao|default:"---" }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dates -->
+    <div>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Datas</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Data Arquivo</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.data_arquivo|default:"---" }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Data Início</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.data_inicio|default:"---" }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Data Finalização</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.data_finalizacao|default:"---" }}</div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Data Saída</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.data_saida|default:"---" }}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status -->
+    <div>
+        <h2 class="text-lg font-medium text-gray-900 dark:text-white mb-4">Status</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Cheia</div>
+                <div class="text-sm text-gray-900 dark:text-white">
+                    {% if documento.cheia %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+                            Sim
+                        </span>
+                    {% else %}
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+                            Não
+                        </span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="space-y-1">
+                <div class="text-sm font-medium text-gray-500 dark:text-gray-400">Usuário</div>
+                <div class="text-sm text-gray-900 dark:text-white">{{ documento.user|default:"---" }}</div>
+            </div>
+        </div>
+    </div>
+</div>
