@@ -1,0 +1,22 @@
+<h1 class="text-lg font-bold my-2">{{ cliente }}</h1>
+<h2 class="font-bold border-dashed border-b-2 my-1">Dados cadastrais</h2>
+<p>{{ cliente.get_tipo_pessoa_display }}</p>
+<p>CNPJ/CPF: {{ cliente.cnpj|default:"Não informado" }}</p>
+<p>Inscrição Estadual: {{ cliente.inscricao_estadual|default:"Não informado" }}</p>
+{% if cliente.atividade %}<p class="italic">Atividade: {{ cliente.atividade }}</p>{% endif %}
+<h2 class="font-bold border-dashed border-b-2 my-1 ">Contato</h2>
+<ul>
+    <li>Telefone 1: {{ cliente.telefone1|default:"---" }}</li>
+    <li>Telefone 2: {{ cliente.telefone_contato|default:"---" }}</li>
+</ul>
+<h2 class="font-bold border-dashed border-b-2 my-1 ">Endereço</h2>
+<p>
+    Logradouro: {{ cliente.endereco|default:"---" }}
+    <br>
+    Bairro: {{ cliente.bairro|default:"---" }}
+    <br>
+    Cidade: {{ cliente.cidade|default:"---" }}
+    <br>
+    Estado: {{ cliente.sigla_estado|default:"---" }}
+    <br>
+</p>

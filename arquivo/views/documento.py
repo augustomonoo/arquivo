@@ -67,6 +67,22 @@ def listar(request, cliente_id: int = None) -> HttpResponse:
     }
     return render(request, "arquivo/documento/listar.html", contexto)
 
+@login_required
+def listar_partial(request, cliente_id = None) -> HttpResponse:
+    form = ConsultaDocumentoForm(request.GET or None)
+    if cliente_id:
+        queryset = Documento.objects.filter(cliente_id=cliente_id)
+    else:
+        queryset = Documento.objects.all()
+    if form.is_valid():
+        queryset = form.search(queryset)
+    contexto = {
+        "form": form,
+        "queryset": queryset,
+        **paginate(queryset, page_number=request.GET.get("page", 0)),
+    }
+    return render(request, "arquivo/documento/listar_partial.html", contexto)
+
 
 @login_required
 def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:

@@ -5,13 +5,16 @@ from arquivo.views import caixa, cliente, documento, main
 caixa_patterns = [
     path("", caixa.caixa_lista, name="caixa_lista"),
     path("<int:numero>", caixa.caixa_detalhe, name="caixa_detalhe"),
+    path("sn", caixa.caixa_none, name="caixa_none"),
 ]
 
 cliente_patterns = [
     path("", cliente.cliente_listar, name="cliente_listar"),
     path("<int:pk>/", cliente.cliente_detalhe, name="cliente_detalhe"),
+    path("<int:pk>/_detalhe/", cliente.cliente_detalhe_partial, name="cliente_detalhe_partial"),
     path("<int:id>/editar/", cliente.cliente_novo, name="cliente_editar"),
     path("<int:cliente_id>/documentos/", documento.listar, name="cliente_documentos"),
+    path("<int:cliente_id>/documentos_partial/", documento.listar_partial, name="cliente_documentos_partial"),
     path(
         "<int:cliente_id>/documentos/imprimir/",
         documento.imprimir_lista,

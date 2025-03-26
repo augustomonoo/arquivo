@@ -35,6 +35,15 @@ def cliente_detalhe(request, pk: int) -> HttpResponse:
     }
     return render(request, "arquivo/cliente/detalhe.html", contexto)
 
+@login_required
+def cliente_detalhe_partial(request, pk: int) -> HttpResponse:
+    cliente = get_object_or_404(Cliente, pk=pk)
+    context = {
+        "Cliente": Cliente,
+        "cliente": cliente,
+    }
+    return render(request, "arquivo/cliente/detalhe_partial.html", context)
+
 
 @login_required
 def cliente_novo(request, id: int = None) -> HttpResponse:

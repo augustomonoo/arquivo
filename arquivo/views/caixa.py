@@ -39,3 +39,15 @@ def caixa_detalhe(request: HttpRequest, numero: int) -> HttpResponse:
         "form": form,
     }
     return render(request, "arquivo/documento/listar.html", contexto)
+
+def caixa_none(request: HttpRequest) -> HttpResponse:
+    documentos = Documento.objects.filter(numero_caixa=None)
+    form = ConsultaDocumentoForm(request.GET or None)
+    if form.is_valid():
+        documentos = form.search(documentos)
+    contexto = {
+        "object_list": documentos,
+        "form": form,
+    }
+    return render(request, "arquivo/documento/listar.html", contexto)
+
