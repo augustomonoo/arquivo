@@ -63,7 +63,6 @@ class DocumentoForm(forms.ModelForm):
     class Meta:
         model = Documento
         fields = [
-            "cliente",
             "tipo_de_documento",
             "observacao",
             "data_finalizacao",
@@ -81,7 +80,7 @@ class DocumentoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if not self.instance.pk:  # If creating a new document
-            self.fields['cliente'].disabled = True
+            self.instance.cliente_id = kwargs.get('initial', {}).get('cliente')
 
 
 class ClienteForm(forms.ModelForm):

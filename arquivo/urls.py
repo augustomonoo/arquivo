@@ -21,14 +21,13 @@ cliente_patterns = [
         name="cliente_imprimir_documentos",
     ),
     path("<int:cliente_id>/documentos/novo/", documento.novo, name="cliente_documento_novo"),
+    path("<int:cliente_id>/documentos/<int:id>/", documento.detalhe, name="cliente_documento_detalhe"),
+    path("<int:cliente_id>/documentos/<int:id>/editar/", documento.novo, name="cliente_documento_editar"),
     path("novo/", cliente.cliente_novo, name="cliente_novo"),
 ]
 
 documento_patterns = [
-    path("", documento.listar, name="documento_listar"),
     path("imprimir/", documento.imprimir_lista, name="documento_imprimir_lista"),
-    path("<int:id>/", documento.detalhe, name="documento_detalhe"),
-    path("<int:id>/editar/", documento.novo, name="documento_editar"),
     path("novo_tipo/", documento.tipo_documento_novo, name="tipo_de_documento_novo"),
 ]
 

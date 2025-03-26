@@ -48,8 +48,8 @@ def novo(request, cliente_id: int = None, id: int = None) -> HttpResponse:
 
 
 @login_required
-def detalhe(request, id: int) -> HttpResponse:
-    documento = get_object_or_404(Documento, id=id)
+def detalhe(request, cliente_id: int, id: int) -> HttpResponse:
+    documento = get_object_or_404(Documento, id=id, cliente_id=cliente_id)
     contexto = {
         "Documento": Documento,
         "documento": documento,
@@ -58,12 +58,9 @@ def detalhe(request, id: int) -> HttpResponse:
 
 
 @login_required
-def listar(request, cliente_id: int = None) -> HttpResponse:
+def listar(request, cliente_id: int) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
-    if cliente_id:
-        queryset = Documento.objects.filter(cliente_id=cliente_id)
-    else:
-        queryset = Documento.objects.all()
+    queryset = Documento.objects.filter(cliente_id=cliente_id)
     if form.is_valid():
         queryset = form.search(queryset)
     contexto = {
@@ -74,12 +71,9 @@ def listar(request, cliente_id: int = None) -> HttpResponse:
     return render(request, "arquivo/documento/listar.html", contexto)
 
 @login_required
-def listar_partial(request, cliente_id = None) -> HttpResponse:
+def listar_partial(request, cliente_id: int) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
-    if cliente_id:
-        queryset = Documento.objects.filter(cliente_id=cliente_id)
-    else:
-        queryset = Documento.objects.all()
+    queryset = Documento.objects.filter(cliente_id=cliente_id)
     if form.is_valid():
         queryset = form.search(queryset)
     contexto = {
@@ -91,13 +85,10 @@ def listar_partial(request, cliente_id = None) -> HttpResponse:
 
 
 @login_required
-def imprimir_lista(request, cliente_id: int = None) -> HttpResponse:
+def imprimir_lista(request, cliente_id: int) -> HttpResponse:
     form = ConsultaDocumentoForm(request.GET or None)
     print_form = ImpressaoListaDocumentoForm(request.GET or None)
-    if cliente_id:
-        queryset = Documento.objects.filter(cliente_id=cliente_id)
-    else:
-        queryset = Documento.objects.all()
+    queryset = Documento.objects.filter(cliente_id=cliente_id)
     if form.is_valid():
         queryset = form.search(queryset)
     if print_form.is_valid():

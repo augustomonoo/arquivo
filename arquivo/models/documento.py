@@ -37,15 +37,11 @@ class Documento(models.Model):
     def __str__(self):
         return f"{self.tipo_de_documento} - {self.observacao}"
 
-    @classmethod
-    def get_listar_url(cls):
-        return reverse_lazy("documento_listar")
-
     def get_absolute_url(self) -> str:
-        return reverse_lazy("documento_detalhe", kwargs={"id": self.id})
+        return reverse_lazy("cliente_documento_detalhe", kwargs={"cliente_id": self.cliente_id, "id": self.id})
 
     def get_edit_url(self):
-        return reverse_lazy("documento_editar", kwargs={"id": self.id})
+        return reverse_lazy("cliente_documento_editar", kwargs={"cliente_id": self.cliente_id, "id": self.id})
 
     def get_detalhe_url(self) -> str:
         return self.get_absolute_url()
