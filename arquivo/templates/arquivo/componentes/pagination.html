@@ -1,58 +1,59 @@
-<div class="flex justify-around w-96 mx-auto items-center my-2">
-    <a href="?{{ paginator_get_str }}page=1" class="flex h-auto w-auto">
+<div class="flex justify-center items-center space-x-4 my-6">
+    <a href="?{{ paginator_get_str }}page=1" 
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
              stroke-width="1.5"
              stroke="currentColor"
-             class="w-6 h-6">
+             class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
         </svg>
     </a>
     <a {% if page_obj.has_previous %}href="?{{ paginator_get_str }}page={{ page_obj.previous_page_number }}"{% endif %}
-       class="flex h-auto w-auto">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_previous %}opacity-50 cursor-not-allowed{% endif %}">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
              stroke-width="1.5"
              stroke="currentColor"
-             class="w-6 h-6">
+             class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
         </svg>
     </a>
-    <p>
-        Página
+    <div class="flex items-center space-x-2">
+        <span class="text-sm text-gray-700 dark:text-gray-200">Página</span>
         <form method="get" class="inline">
             {% for arg_name, arg_val in paginator_get.items %}
                 <input type="hidden" name="{{ arg_name }}" value="{{ arg_val }}" />
             {% endfor %}
             <input type="text"
                    value="{{ page_obj.number }}"
-                   class="w-14 h-8 text-center p-1 dark:text-black"
+                   class="w-14 h-8 text-center rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                    maxlength="5"
                    name="page"/>
         </form>
-        de {{ page_obj.paginator.num_pages }}
-    </p>
+        <span class="text-sm text-gray-700 dark:text-gray-200">de {{ page_obj.paginator.num_pages }}</span>
+    </div>
     <a {% if page_obj.has_next %}href="?{{ paginator_get_str }}page={{ page_obj.next_page_number }}"{% endif %}
-       class="flex w-auto h-auto">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_next %}opacity-50 cursor-not-allowed{% endif %}">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
              stroke-width="1.5"
              stroke="currentColor"
-             class="w-6 h-6">
+             class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
         </svg>
     </a>
     <a href="?{{ paginator_get_str }}page={{ page_obj.paginator.num_pages }}"
-       class="flex w-auto h-auto">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
              stroke-width="1.5"
              stroke="currentColor"
-             class="w-6 h-6">
+             class="w-5 h-5">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
         </svg>
     </a>

@@ -1,31 +1,62 @@
-<nav class="p-4 bg-white dark:bg-gray-800 w-64 flex flex-col h-screen fixed top-0 left-0 border-r border-gray-200 dark:border-gray-700 shadow-lg">
+<nav class="p-4 bg-white dark:bg-gray-800 w-64 flex flex-col h-screen fixed top-0 left-0 border-r border-gray-200 dark:border-gray-700 shadow-lg transition-colors duration-300">
    {% comment %} nav_links são injetados no contexto pela funcao componentes.menu {% endcomment %}
    <div class="mb-8">
-      <h1 class="text-xl font-bold text-gray-900 dark:text-white">Arquivo</h1>
+      <h1 class="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-300">Arquivo</h1>
    </div>
    <div class="space-y-6">
       {% for nav_link in nav_links %}
       {% if nav_link.is_link %}
       <a href="{{ nav_link.href }}"
-         class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-150">
+         class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-300">
          {{ nav_link.text }}
       </a>
       {% elif nav_link.is_form %}
          {% include nav_link.action with text=nav_link.text %}
       {% else %}
       <div class="space-y-2">
-         <div class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+         <div class="px-4 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider transition-colors duration-300">
             {{ nav_link.text }}
          </div>
-         <div class="border-t border-gray-200 dark:border-gray-700"></div>
+         <div class="border-t border-gray-200 dark:border-gray-700 transition-colors duration-300"></div>
       </div>
       {% endif %}
       {% endfor %}
-      <a class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-150 cursor-pointer"
+      <a class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-300 cursor-pointer"
          hx-post="{% url 'logout' %}" 
          hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
          hx-target="body">
          Sair
       </a>
+   </div>
+
+   <!-- Theme Toggle Panel -->
+   <div class="absolute left-0 bottom-0 w-full">
+      <button id="darkModeToggle" class="flex items-center justify-center w-10 h-10 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-300">
+         <svg class="w-5 h-5 theme-icon" data-theme="light" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+         </svg>
+         <svg class="w-5 h-5 theme-icon hidden" data-theme="dark" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+         </svg>
+      </button>
+      <div id="themePanel" class="absolute bottom-0 left-0 bg-white dark:bg-gray-800 shadow-lg transition-transform duration-300 transform -translate-x-full">
+         <div class="flex gap-2 p-2">
+            <button class="theme-option flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-300" data-theme="light" title="Light Mode">
+               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path>
+               </svg>
+            </button>
+            <button class="theme-option flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-300" data-theme="dark" title="Dark Mode">
+               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+               </svg>
+            </button>
+            <button class="theme-option flex items-center justify-center w-10 h-10 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors duration-300" data-theme="system" title="System Mode">
+               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+               </svg>
+            </button>
+         </div>
+      </div>
    </div>
 </nav>
