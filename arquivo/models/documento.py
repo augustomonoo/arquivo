@@ -41,10 +41,6 @@ class Documento(models.Model):
     def get_listar_url(cls):
         return reverse_lazy("documento_listar")
 
-    @classmethod
-    def get_criar_url(cls) -> str:
-        return reverse_lazy("documento_novo")
-
     def get_absolute_url(self) -> str:
         return reverse_lazy("documento_detalhe", kwargs={"id": self.id})
 

@@ -15,9 +15,14 @@ from arquivo.views.utils import paginate
 
 
 @login_required
-def novo(request, id: int = None) -> HttpResponse:
+def novo(request, cliente_id: int = None, id: int = None) -> HttpResponse:
+    if not cliente_id and not id:
+        return redirect('cliente_listar')
+
     form = DocumentoForm(
-        request.POST or None, instance=Documento.objects.get(id=id) if id else None
+        request.POST or None,
+        instance=Documento.objects.get(id=id) if id else None,
+        initial={'cliente': cliente_id} if cliente_id else None
     )
     if form.is_valid():
         documento = form.save(commit=False)
@@ -30,13 +35,14 @@ def novo(request, id: int = None) -> HttpResponse:
             cheia=documento.cheia
         )
         historico = Historico(user=request.user, nome_user=request.user.get_full_name())
-        historico.formulario = "editar documento" if id else "novo cliente"
+        historico.formulario = "editar documento" if id else "novo documento"
         historico.descricao = f"id: {documento.id}"
         historico.save()
         return redirect(documento.get_detalhe_url())
     contexto = {
         "Documento": Documento,
         "form": form,
+        "cliente_id": cliente_id,
     }
     return render(request, "arquivo/documento/novo.html", contexto)
 

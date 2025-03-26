@@ -68,7 +68,6 @@ class DocumentoForm(forms.ModelForm):
             "observacao",
             "data_finalizacao",
             "data_saida",
-            # "data_arquivo",
             "data_inicio",
             "numero_caixa",
             "cheia",
@@ -78,6 +77,11 @@ class DocumentoForm(forms.ModelForm):
             "data_inicio": forms.DateInput(attrs={"type": "date"}),
             "data_finalizacao": forms.DateInput(attrs={"type": "date"}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.instance.pk:  # If creating a new document
+            self.fields['cliente'].disabled = True
 
 
 class ClienteForm(forms.ModelForm):

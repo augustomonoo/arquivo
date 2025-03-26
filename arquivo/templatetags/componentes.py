@@ -44,7 +44,6 @@ def menu() -> dict[str, list[NavLink]]:
             NavLink(text="Início", action=HRef(reverse_lazy("main_index"))),
             NavLink(text="Documentos"),
             NavLink(text="Consultar Documentos", action=HRef(Documento.get_listar_url())),
-            NavLink(text="Novo Lançamento", action=HRef(Documento.get_criar_url())),
             # "Arquivos",
             # {"href": Arquivo.get_criar_url(), "text": "Novo Arquivo"},
             # {"href": Arquivo.get_listar_url(), "text": "Consultar arquivos"},

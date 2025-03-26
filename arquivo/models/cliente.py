@@ -55,6 +55,9 @@ class Cliente(models.Model):
     def get_document_list_url(self) -> str:
         return reverse_lazy("cliente_documentos", kwargs={"cliente_id": self.id})
 
+    def get_document_create_url(self) -> str:
+        return reverse_lazy("cliente_documento_novo", kwargs={"cliente_id": self.id})
+
     def get_dict_field(self) -> dict[str, Any]:
         fields = [f for f in self._meta.get_fields() if hasattr(f, "verbose_name")]
         return {f.verbose_name: f.value_from_object(self) for f in fields}
