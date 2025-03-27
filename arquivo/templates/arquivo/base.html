@@ -11,6 +11,13 @@
               media="(prefers-color-scheme: light)"
               content="white"/>
         <link rel="stylesheet" href="{% static 'arquivo/style.css' %}">
+        <script>
+            // Check for saved theme preference, otherwise use system preference
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            if (savedTheme === 'dark' || (savedTheme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            }
+        </script>
         <title>Arquivo</title>
     </head>
     <body class="bg-gray-200 dark:bg-gray-800 dark:text-white flex flex-row flex-nowrap transition-colors duration-500">
