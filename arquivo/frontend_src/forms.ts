@@ -19,6 +19,8 @@ function initializeFormToggles() {
         if (!container) return;
         const slider = container.querySelector<HTMLElement>('span:not(.sr-only)');
         if (!slider) return;
+        // Set the initial state of the slider first
+        updateSliderVisual(container, slider, checkbox);
         container.addEventListener('click', () => {
             checkbox.checked = !checkbox.checked;
             updateSliderVisual(container, slider, checkbox);
