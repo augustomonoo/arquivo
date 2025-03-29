@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.http.response import Http404
-from django.shortcuts import get_list_or_404, render
+from django.shortcuts import render
 
 from arquivo.forms import ConsultaDocumentoForm
 from arquivo.models.documento import Documento
