@@ -8,13 +8,18 @@ from arquivo.models.caixa import Caixa
 
 
 def caixa_lista(request: HttpRequest) -> HttpResponse:
+    qs = Documento.objects.all()
+    form = ConsultaDocumentoForm(request.GET or None)
+    if form.is_valid():
+        qs = form.search(qs)
     caixas = [
-        Caixa(numero=int(n), cheia=c)
-        for n, c in Documento.objects.values_list("numero_caixa", "cheia").distinct()
+        Caixa(numero=n, cheia=c)
+        for n, c in qs.values_list("numero_caixa", "cheia").distinct()
     ]
     contexto = {
         "object_list": caixas,
         "caixas": caixas,
+        "form": form,
     }
     return render(request, "arquivo/caixa/listar.html", contexto)
 
