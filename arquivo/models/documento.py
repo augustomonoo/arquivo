@@ -49,3 +49,11 @@ class Documento(models.Model):
     def get_dict_field(self) -> dict[str, Any]:
         fields = [f for f in self._meta.get_fields() if hasattr(f, "verbose_name")]
         return {f.verbose_name: f.value_from_object(self) for f in fields}
+
+    def get_caixa(self):
+        from arquivo.models.caixa import Caixa
+
+        return Caixa(
+            self.numero_caixa,
+            self.cheia,
+        )

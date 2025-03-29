@@ -1,18 +1,10 @@
-from dataclasses import dataclass, field
-
 from django.http import HttpRequest, HttpResponse
 from django.http.response import Http404
 from django.shortcuts import get_list_or_404, render
 
 from arquivo.forms import ConsultaDocumentoForm
 from arquivo.models.documento import Documento
-
-
-@dataclass
-class Caixa:
-    numero: int
-    cheia: bool
-    documentos: list[Documento] = field(default_factory=list)
+from arquivo.models.caixa import Caixa
 
 
 def caixa_lista(request: HttpRequest) -> HttpResponse:
