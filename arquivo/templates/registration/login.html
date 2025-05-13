@@ -1,7 +1,7 @@
 {% extends "arquivo/base.html" %}
 
 {% block content %}
-    <form action="." method="post">
+    <form action="/login/" method="post">
         {% csrf_token %}
         {% include "arquivo/componentes/form.html" with labels=True %}
         <input type="hidden" name="next" value="{{ next }}" />
