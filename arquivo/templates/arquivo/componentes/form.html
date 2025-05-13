@@ -12,12 +12,12 @@
                 </label>
             {% endif %}
             {% if field.name == 's' %}
-                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder="Pesquisar..." %}
+                {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder="Pesquisar..." %}
             {% else %}
                 {% if placeholder %}
-                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
+                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" placeholder=field.label %}
                 {% else %}
-                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
+                    {% render_field field class+="block w-full rounded-md border-gray-300 dark:border-gray-600 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm" %}
                 {% endif %}
             {% endif %}
             {% if field.help_text %}

@@ -1,6 +1,6 @@
 <div class="flex justify-center items-center space-x-4 my-6">
     <a href="?{{ paginator_get_str }}page=1" 
-       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-xs text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
@@ -11,7 +11,7 @@
         </svg>
     </a>
     <a {% if page_obj.has_previous %}href="?{{ paginator_get_str }}page={{ page_obj.previous_page_number }}"{% endif %}
-       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_previous %}opacity-50 cursor-not-allowed{% endif %}">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-xs text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_previous %}opacity-50 cursor-not-allowed{% endif %}">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
@@ -29,14 +29,14 @@
             {% endfor %}
             <input type="text"
                    value="{{ page_obj.number }}"
-                   class="w-14 h-8 text-center rounded-md border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm"
+                   class="w-14 h-8 text-center rounded-md border-gray-300 dark:border-gray-600 shadow-xs focus:border-indigo-500 focus:ring-indigo-500 dark:bg-gray-700 dark:text-white sm:text-sm"
                    maxlength="5"
                    name="page"/>
         </form>
         <span class="text-sm text-gray-700 dark:text-gray-200">de {{ page_obj.paginator.num_pages }}</span>
     </div>
     <a {% if page_obj.has_next %}href="?{{ paginator_get_str }}page={{ page_obj.next_page_number }}"{% endif %}
-       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_next %}opacity-50 cursor-not-allowed{% endif %}">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-xs text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 {% if not page_obj.has_next %}opacity-50 cursor-not-allowed{% endif %}">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
@@ -47,7 +47,7 @@
         </svg>
     </a>
     <a href="?{{ paginator_get_str }}page={{ page_obj.paginator.num_pages }}"
-       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+       class="inline-flex items-center p-2 border border-gray-300 dark:border-gray-600 shadow-xs text-sm font-medium rounded-md text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
         <svg xmlns="http://www.w3.org/2000/svg"
              fill="none"
              viewBox="0 0 24 24"
