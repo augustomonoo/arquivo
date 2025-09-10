@@ -12,7 +12,7 @@ from .tipo_de_documento import TipoDeDocumento
 
 
 class Documento(models.Model):
-    numero_caixa = models.FloatField(default=-1.0)
+    numero_caixa = models.PositiveIntegerField(blank=True, null=True)
     tipo_de_documento = models.ForeignKey(
         TipoDeDocumento,
         verbose_name="tipo de documento",
