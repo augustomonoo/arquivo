@@ -9,5 +9,12 @@
         {% else %}
             {% render_field field class+="form-input rounded dark:text-black" %}
         {% endif %}
+        {% if field.errors %}
+            <ul class="bg-red-400 rounded-md border-1 border-red-600 px-2 py-1 my-2">
+                {% for error in field.errors %}
+                    <li class="text-white font-bold">{{  error }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
     </div>
 {% endfor %}
